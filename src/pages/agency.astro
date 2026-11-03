@@ -1,0 +1,112 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ButtonMask from '../components/ui/ButtonMask.astro';
+
+const principles = [
+  {
+    num: '01',
+    title: 'Builders Over Bureaucracy',
+    body: 'We eliminated account managers and endless status meetings. When you partner with Lowkeydevs, you talk directly with the engineers, designers, and growth strategists executing your project.'
+  },
+  {
+    num: '02',
+    title: 'Output Is The Only Honest Metric',
+    body: 'Agencies love billable hours; we love shipped outcomes. We measure our engagements by functional software deployed, content reaching audiences, and conversion pipelines live.'
+  },
+  {
+    num: '03',
+    title: 'Zero Generic Templates',
+    body: 'Cookie-cutter themes and generic AI copy dilute your brand authority. Every web application, short-form video, and visual identity we produce is custom-tailored to your unique market positioning.'
+  },
+  {
+    num: '04',
+    title: 'Built For Day One Thousand',
+    body: 'We don’t cut corners that cause technical debt six months later. Whether it’s edge database rules or modular motion assets, our work scales seamlessly with your business.'
+  }
+];
+
+const processSteps = [
+  {
+    step: 'Phase 01',
+    title: 'Discover & Map',
+    description: 'We audit your current technical architecture, competitive positioning, and audience landscape. We define clear delivery milestones, core KPIs, and technical specifications before writing a single line of code.'
+  },
+  {
+    step: 'Phase 02',
+    title: 'Design & Build',
+    description: 'Rapid sprint execution. We design tactile brand assets, engineer edge-native web applications, produce high-retention video reels, and initiate creator outreach workflows in tight feedback loops.'
+  },
+  {
+    step: 'Phase 03',
+    title: 'Deploy & Scale',
+    description: 'Production release across global edge networks. We verify technical SEO, launch multi-channel creator distribution, and monitor lead conversion telemetry to continuously compound your digital advantage.'
+  }
+];
+---
+
+<Layout
+  title="The Agency — Lowkeydevs"
+  description="Learn about Lowkeydevs: our operating principles, studio ethos, and disciplined sprint process."
+>
+  <Header />
+
+  <main id="main-content" class="site-max pt-36 pb-24">
+    <!-- Agency Hero -->
+    <div class="mb-32 text-center max-w-4xl mx-auto">
+      <span class="text-12 text-[#ff3831] font-bold block mb-4 tracking-widest uppercase">The Studio</span>
+      <h1 class="h1 font-tan mb-8">Lowkey presence.<br/>High-impact output.</h1>
+      <p class="text-18 text-white/70 max-w-2xl mx-auto leading-relaxed">
+        Most digital agencies are loud on self-promotion and fragile on execution. We operate with deliberate understatement—letting the performance of our software, brand craft, and client growth speak for itself.
+      </p>
+    </div>
+
+    <!-- Principles Matrix -->
+    <section class="border-t border-white/10 pt-20 mb-36">
+      <span class="text-12 text-[#ff3831] font-bold block mb-4 tracking-widest uppercase">Core Values</span>
+      <h2 class="h2 font-tan mb-16">The Lowkey Standard</h2>
+
+      <div class="grid grid-cols-1 s:grid-cols-2 gap-12">
+        {principles.map(p => (
+          <div class="p-10 bg-white/[0.02] border border-white/10 rounded-global flex flex-col justify-between">
+            <div>
+              <span class="font-tan text-4xl text-[#ff3831] block mb-6">{p.num}</span>
+              <h3 class="text-24 font-bold text-[#fffddb] mb-4">{p.title}</h3>
+              <p class="text-15 text-white/70 leading-relaxed">{p.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- The 3-Step Process -->
+    <section id="process" class="border-t border-white/10 pt-20 max-w-5xl mx-auto">
+      <span class="text-12 text-[#ff3831] font-bold block mb-4 tracking-widest uppercase text-center">Our Methodology</span>
+      <h2 class="h2 font-tan text-center mb-16">How we execute.</h2>
+
+      <div class="flex flex-col gap-12">
+        {processSteps.map((step, idx) => (
+          <div class="flex flex-col s:flex-row gap-8 p-8 bg-white/[0.015] border border-white/10 rounded-global items-start">
+            <span class="px-4 py-2 bg-[#ff3831] text-[#fffddb] text-xs font-bold uppercase rounded-md tracking-wider">
+              {step.step}
+            </span>
+            <div class="flex-1">
+              <h3 class="text-24 font-bold text-[#fffddb] mb-3">{step.title}</h3>
+              <p class="text-15 text-white/70 leading-relaxed">{step.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="text-center mt-20">
+        <ButtonMask href="/contact" variant="red">
+          <span>Start a Sprint With Us →</span>
+        </ButtonMask>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+

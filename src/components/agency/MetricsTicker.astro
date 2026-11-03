@@ -1,0 +1,57 @@
+---
+const metrics = [
+  {
+    number: '04',
+    badge: 'Integrated',
+    label: 'Core Agency Disciplines'
+  },
+  {
+    number: 'Sub-50ms',
+    badge: 'Edge-First',
+    label: 'Cloudflare TTFB Performance'
+  },
+  {
+    number: 'Full-Cycle',
+    badge: 'Talent Ops',
+    label: 'Creator Discovery & Campaigns'
+  },
+  {
+    number: '100%',
+    badge: 'Bespoke',
+    label: 'Custom Frontend Engineering'
+  },
+  {
+    number: 'Omnichannel',
+    badge: 'Acquisition',
+    label: 'SEO, Content & Paid Media'
+  },
+  {
+    number: 'Direct',
+    badge: 'No Middlemen',
+    label: 'Direct-to-Builder Access'
+  }
+];
+---
+
+<section class="ticker" aria-label="Capabilities and execution standards ticker">
+  <div class="ticker__track">
+    <!-- First pass -->
+    {metrics.map(m => (
+      <div class="ticker__item">
+        <span class="ticker__number">{m.number}</span>
+        <span class="ticker__badge">{m.badge}</span>
+        <span class="ticker__label">{m.label}</span>
+      </div>
+    ))}
+
+    <!-- Second duplicate pass for seamless infinite loop -->
+    {metrics.map(m => (
+      <div class="ticker__item" aria-hidden="true">
+        <span class="ticker__number">{m.number}</span>
+        <span class="ticker__badge">{m.badge}</span>
+        <span class="ticker__label">{m.label}</span>
+      </div>
+    ))}
+  </div>
+</section>
+

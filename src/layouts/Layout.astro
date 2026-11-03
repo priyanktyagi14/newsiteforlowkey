@@ -1,25 +1,20 @@
 ---
 import '../styles/index.css';
-import SuggestFeatureButton from '../components/SuggestFeatureButton.astro';
 
 interface Props {
   title?: string;
   description?: string;
   canonicalUrl?: string;
   ogImage?: string;
-  toolSlug?: string;
-  toolCategory?: string;
   keywords?: string;
 }
 
 const {
-  title = 'Lowkeydevs - Fast, Private Online Tools',
-  description = 'The internet\'s default toolbox. Free, client-side, privacy-respecting online developer tools and utilities with zero registration required.',
+  title = 'Lowkeydevs — Multidisciplinary Digital Agency',
+  description = 'A multidisciplinary digital agency at the crossroad of software engineering, brand identity, and creator-led distribution.',
   canonicalUrl = Astro.url.href,
   ogImage = '/og-default.png',
-  toolSlug,
-  toolCategory,
-  keywords
+  keywords = 'Lowkeydevs, digital agency, web development, creator management, brand identity, short form video production, technical SEO, cloudflare edge'
 } = Astro.props;
 
 const isPagesDev = Astro.url.hostname.endsWith('.pages.dev');
@@ -31,34 +26,35 @@ const isPagesDev = Astro.url.hostname.endsWith('.pages.dev');
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Google tag (gtag.js) -->
+    <!-- Google Analytics (GA4) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-F7EN86B9VB" is:inline></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-F7EN86B9VB');
     </script>
 
+    <!-- Preload Display Serif & Swiss Sans Fonts -->
+    <link rel="preload" href="/fonts/TANMEMORIES-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/HelveticaNeueLTPro-Roman.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Favicon & PWA Icons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
     <link rel="icon" href="/favicon.ico?v=2" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2" />
-    <link rel="mask-icon" href="/safari-pinned-tab.svg?v=2" color="#1f2937" />
     <link rel="manifest" href="/site.webmanifest?v=2" />
 
-    <!-- SEO Tags -->
+    <!-- SEO Meta Tags -->
     {isPagesDev && <meta name="robots" content="noindex, nofollow" />}
     <title>{title}</title>
     <meta name="description" content={description} />
     {keywords && <meta name="keywords" content={keywords} />}
-    <meta name="generator" content={Astro.generator} />
-    <meta name="author" content="Lowkeydevs" />
-    <meta name="theme-color" content="#121212" />
+    <meta name="author" content="Lowkeydevs Studio" />
+    <meta name="theme-color" content="#181616" />
     <link rel="canonical" href={canonicalUrl} />
-    <link rel="sitemap" href="/sitemap.xml" />
 
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph / Social Sharing -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
@@ -67,38 +63,14 @@ const isPagesDev = Astro.url.hostname.endsWith('.pages.dev');
     <meta property="og:site_name" content="Lowkeydevs" />
     <meta property="og:locale" content="en_US" />
 
-    <!-- Twitter -->
+    <!-- Twitter Card -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalUrl} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={new URL(ogImage, Astro.url).href} />
-
-    <!-- Google Fonts Preconnect and Load -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;1,14..32,400&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Theme detection (runs before paint to prevent flash) -->
-    <script is:inline>
-      (function() {
-        const stored = localStorage.getItem('Lowkeydevs-theme');
-        if (stored === 'light' || stored === 'dark') {
-          document.documentElement.setAttribute('data-theme', stored);
-        } else {
-          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
-        }
-      })();
-    </script>
   </head>
-  <body data-tool-slug={toolSlug} data-tool-category={toolCategory}>
-    <a href="#main-content" class="skip-link">Skip to content</a>
+  <body>
     <slot />
-    <SuggestFeatureButton />
   </body>
 </html>
-

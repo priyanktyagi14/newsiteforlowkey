@@ -1,0 +1,147 @@
+---
+import ButtonMask from '../ui/ButtonMask.astro';
+---
+
+<!-- Mask Backdrop -->
+<div class="drawer-overlay" id="drawer-overlay" aria-hidden="true"></div>
+
+<!-- Slide-out Drawer Panel -->
+<aside class="drawer" id="case-drawer" aria-labelledby="drawer-title" aria-modal="true" role="dialog">
+  <!-- Signature 3D Flipping Close Button -->
+  <button class="drawer__close" id="drawer-close" aria-label="Close case study dossier" type="button">
+    ✕
+  </button>
+
+  <div class="drawer__content" id="drawer-content">
+    <span class="drawer__eyebrow" id="drawer-category">Web Development</span>
+    <h2 class="drawer__title" id="drawer-title">Project Title</h2>
+
+    <!-- Dynamic Media Holder -->
+    <div class="drawer__media" id="drawer-media">
+      <!-- Injected dynamically via script -->
+    </div>
+
+    <!-- The Challenge -->
+    <div class="drawer__section">
+      <h3 class="drawer__label">The Challenge</h3>
+      <p class="drawer__body" id="drawer-challenge">
+        High-traffic consumer applications require instant edge execution without cold starts or server memory overhead.
+      </p>
+    </div>
+
+    <!-- The Solution -->
+    <div class="drawer__section">
+      <h3 class="drawer__label">Our Execution</h3>
+      <p class="drawer__body" id="drawer-solution">
+        Engineered an edge-first Astro SSR architecture deployed globally across Cloudflare Points of Presence.
+      </p>
+    </div>
+
+    <!-- Deliverables -->
+    <div class="drawer__section">
+      <h3 class="drawer__label">Key Deliverables</h3>
+      <ul class="drawer__deliverables" id="drawer-deliverables">
+        <!-- Injected dynamically -->
+      </ul>
+    </div>
+
+    <!-- Tech Stack -->
+    <div class="drawer__section">
+      <h3 class="drawer__label">Technologies & Tools</h3>
+      <div class="flex flex-wrap gap-2 pt-2" id="drawer-stack">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+
+    <!-- Conversion Action -->
+    <div class="pt-8 border-t border-white/10 mt-12 flex justify-between items-center">
+      <span class="text-sm text-white/60">Ready to build your next milestone?</span>
+      <ButtonMask href="/contact" variant="red">
+        <span>Start a Project →</span>
+      </ButtonMask>
+    </div>
+  </div>
+</aside>
+
+<script>
+  // Case Study Drawer Interactive Controller
+  const drawer = document.getElementById('case-drawer');
+  const overlay = document.getElementById('drawer-overlay');
+  const closeBtn = document.getElementById('drawer-close');
+
+  const catEl = document.getElementById('drawer-category');
+  const titleEl = document.getElementById('drawer-title');
+  const mediaEl = document.getElementById('drawer-media');
+  const chalEl = document.getElementById('drawer-challenge');
+  const solEl = document.getElementById('drawer-solution');
+  const delivEl = document.getElementById('drawer-deliverables');
+  const stackEl = document.getElementById('drawer-stack');
+
+  const openDrawer = (project: any) => {
+    if (!project) return;
+
+    if (catEl) catEl.textContent = project.category;
+    if (titleEl) titleEl.textContent = project.title;
+    if (chalEl) chalEl.textContent = project.challenge;
+    if (solEl) solEl.textContent = project.solution;
+
+    // Render media
+    if (mediaEl) {
+      if (project.mediaType === 'video') {
+        mediaEl.innerHTML = `<video src="${project.mediaSrc}" class="w-full h-auto rounded-global" autoplay muted loop playsinline></video>`;
+      } else {
+        mediaEl.innerHTML = `<img src="${project.mediaSrc}" alt="${project.title}" class="w-full h-auto rounded-global object-cover" />`;
+      }
+    }
+
+    // Render deliverables
+    if (delivEl) {
+      delivEl.innerHTML = project.deliverables
+        .map((d: string) => `<li>${d}</li>`)
+        .join('');
+    }
+
+    // Render tech stack
+    if (stackEl) {
+      stackEl.innerHTML = project.techStack
+        .map((t: string) => `<span class="inline-block px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-[#fffddb]">${t}</span>`)
+        .join('');
+    }
+
+    drawer?.classList.add('is-active');
+    overlay?.classList.add('is-active');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeDrawer = () => {
+    drawer?.classList.remove('is-active');
+    overlay?.classList.remove('is-active');
+    document.body.style.overflow = '';
+  };
+
+  closeBtn?.addEventListener('click', closeDrawer);
+  overlay?.addEventListener('click', closeDrawer);
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeDrawer();
+  });
+
+  // Attach click listeners to case-item cards
+  document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.case-item');
+    cards.forEach((card) => {
+      const pid = card.getAttribute('data-project-id');
+      card.addEventListener('click', () => {
+        const found = (window as any).__LOWKEY_PROJECTS?.find((p: any) => p.id === pid);
+        if (found) openDrawer(found);
+      });
+      card.addEventListener('keydown', (e: any) => {
+        if (e.key === 'Enter') {
+          const found = (window as any).__LOWKEY_PROJECTS?.find((p: any) => p.id === pid);
+          if (found) openDrawer(found);
+        }
+      });
+    });
+  });
+</script>
+

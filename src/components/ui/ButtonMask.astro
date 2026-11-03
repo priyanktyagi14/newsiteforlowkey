@@ -1,0 +1,50 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'cream' | 'red' | 'outline';
+  class?: string;
+  id?: string;
+  type?: 'button' | 'submit' | 'reset';
+  target?: string;
+}
+
+const {
+  href,
+  variant = 'cream',
+  class: className = '',
+  id,
+  type = 'button',
+  target,
+} = Astro.props;
+
+const variantClass = variant === 'red' ? '--red' : variant === 'outline' ? '--outline' : '';
+---
+
+{
+  href ? (
+    <a
+      href={href}
+      class={`btn-mask ${variantClass} ${className}`}
+      id={id}
+      target={target}
+      rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+    >
+      <span class="btn-mask__label">
+        <slot />
+      </span>
+      <span class="btn-mask__mask" aria-hidden="true">
+        <slot />
+      </span>
+    </a>
+  ) : (
+    <button type={type} class={`btn-mask ${variantClass} ${className}`} id={id}>
+      <span class="btn-mask__label">
+        <slot />
+      </span>
+      <span class="btn-mask__mask" aria-hidden="true">
+        <slot />
+      </span>
+    </button>
+  )
+}
+

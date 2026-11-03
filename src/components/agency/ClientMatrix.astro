@@ -1,0 +1,31 @@
+---
+const platforms = [
+  { name: 'Astro', role: 'Edge SSR Engine' },
+  { name: 'Cloudflare', role: 'Global Workers & CDN' },
+  { name: 'TypeScript', role: 'Type-Safe Software' },
+  { name: 'Supabase', role: 'Relational DB & Auth' },
+  { name: 'Tailwind CSS', role: 'Design Systems' },
+  { name: 'Shopify', role: 'Headless E-Commerce' },
+  { name: 'Stripe', role: 'Global Checkout & API' },
+  { name: 'Meta Ads', role: 'Audience Acquisition' },
+  { name: 'TikTok Hub', role: 'Creator Distribution' },
+  { name: 'Figma', role: 'UI/UX & Brand Design' },
+  { name: 'Adobe Premiere', role: 'Cinema Post-Production' },
+  { name: 'Google Cloud', role: 'Search Console & GA4' }
+];
+---
+
+<section class="clients site-max" id="ecosystem" aria-labelledby="clients-heading">
+  <span class="text-12 text-[#ff3831] font-bold block mb-4 tracking-widest uppercase">03 // Technology & Platforms</span>
+  <h2 id="clients-heading" class="clients__title">Platforms & Ecosystem</h2>
+
+  <div class="clients__matrix">
+    {platforms.map(p => (
+      <div class="client-cell">
+        <span class="client-cell__name">{p.name}</span>
+        <span class="client-cell__role">{p.role}</span>
+      </div>
+    ))}
+  </div>
+</section>
+

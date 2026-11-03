@@ -1,380 +1,123 @@
 ---
-import Icon from './base/Icon.astro';
-import { registry, categories } from '../tools/registry';
-
-// Serialize tools metadata for client-side instant search
-const searchIndex = registry.map(tool => ({
-  title: tool.title,
-  slug: tool.slug,
-  description: tool.description,
-  keywords: tool.keywords,
-  category: tool.category,
-  icon: tool.icon
-}));
+import ButtonMask from './ui/ButtonMask.astro';
 ---
 
-<header class="site-header" id="site-header">
-  <div class="container nav-container">
-    <a href="/" class="logo" aria-label="Lowkeydevs Homepage">
-      <Icon name="Logo" size={26} class="logo-icon" />
-      <span class="logo-text">Lowkey<span class="logo-accent">devs</span></span>
-    </a>
+<header class="sh" id="site-header">
+  <!-- Pinned Top-Left Brand Mark Box -->
+  <a href="/" class="sh__box" aria-label="Lowkeydevs Home">
+    <svg class="w-24 h-24" width="28" height="28" viewBox="0 0 41 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M28.8696 28.0488C30.5395 26.3207 32.2966 24.5889 34.6832 23.8524C37.4845 22.9866 40.806 23.68 40.4895 27.1865C40.2785 29.529 37.1425 31.1421 35.6873 32.8487C33.6682 35.2199 32.846 38.6115 30.6923 41.1228C30.3176 41.5576 28.8078 42.8042 28.6659 43.124C28.2912 43.9899 29.4481 47.3958 29.3717 48.6245C29.3026 49.7491 27.7673 51.0353 26.8796 51.6353C22.7541 54.4197 13.5972 54.6065 9.69728 51.3155C7.60179 49.5443 8.33303 48.5311 8.20206 46.1204C8.16932 45.5168 7.98378 44.906 8.03471 44.2845C4.72048 41.6869 2.21024 38.4067 1.10792 34.3181C0.329389 31.4296 -0.107174 26.2093 2.52311 24.1111C2.75595 23.9243 3.50902 23.565 3.54176 23.5183C3.6036 23.4285 3.77459 22.0884 3.94558 21.6465C4.3494 20.6046 5.50265 19.0561 6.71411 18.977L5.03698 16.5663C2.77414 13.0598 1.47536 9.75801 3.13794 5.64071C5.64817 -0.57118 13.4845 -1.7532 17.9228 3.17607C18.152 3.43116 19.0106 4.7533 19.2071 4.70659C19.3089 4.68144 19.68 4.01319 19.8182 3.84073C22.3539 0.761735 25.348 -0.592737 29.4044 0.506649C35.5017 2.15573 37.0625 9.15084 34.6541 14.3603C33.8101 16.1819 32.4385 17.6441 31.4563 19.3399C29.9792 21.8872 29.0224 25.1279 28.866 28.0524L28.8696 28.0488Z" fill="#FFFEDB" />
+    </svg>
+  </a>
 
-    <!-- Desktop Navigation -->
-    <nav class="nav-links" aria-label="Main navigation">
-      <a href="/" class="nav-link">Home</a>
-      <a href="/about" class="nav-link">About</a>
+  <!-- Scrolled Sticky Dropdown Navigation Capsule -->
+  <nav class="sh__nav" id="sticky-nav" aria-label="Main Navigation">
+    <a href="#work" class="sh__link">Selected Work</a>
+    
+    <div class="sh__services-group">
+      <button class="sh__link sh__services-toggle" id="services-toggle" type="button" aria-expanded="false">
+        <span>Services</span>
+        <svg class="sh__chevron" id="services-chevron" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="sh__subnav" id="services-subnav">
+        <a href="/services#web-development" class="sh__sublink">Web Development</a>
+        <a href="/services#social-creator" class="sh__sublink">Social & Creators</a>
+        <a href="/services#creative-production" class="sh__sublink">Creative & Brand</a>
+        <a href="/services#digital-growth" class="sh__sublink">Digital Growth</a>
+      </div>
+    </div>
+
+    <a href="/agency" class="sh__link">Agency</a>
+    <a href="/agency#process" class="sh__link">Process</a>
+    <a href="/contact" class="sh__link">Contact</a>
+  </nav>
+
+  <!-- Pinned Top-Right Action -->
+  <div class="sh-right">
+    <ButtonMask href="/contact" variant="cream" class="hidden s:inline-flex">
+      <span>Start a Project</span>
+      <span class="btn-mask__icon">→</span>
+    </ButtonMask>
+
+    <!-- Mobile Menu Button -->
+    <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Fullscreen Mobile Navigation Drawer -->
+  <div class="mm" id="mobile-menu" aria-hidden="true">
+    <div class="flex justify-between items-center">
+      <a href="/" class="font-tan text-3xl text-[#fffddb]">Lowkeydevs</a>
+      <button class="text-2xl text-[#ff3831] p-2" id="mobile-close" aria-label="Close menu">✕</button>
+    </div>
+
+    <nav class="mm__links">
+      <a href="#work" class="mm__link">Selected Work</a>
+      <a href="/services" class="mm__link">Services</a>
+      <a href="/agency" class="mm__link">Agency</a>
+      <a href="/agency#process" class="mm__link">Process</a>
+      <a href="/contact" class="mm__link text-[#ff3831]">Start a Project →</a>
     </nav>
 
-    <!-- Right Actions -->
-    <div class="right-header-group">
-      <button class="nav-icon-btn" id="search-toggle-btn" aria-label="Search tools" title="Search tools (/)">
-        <Icon name="Search" size={18} />
-      </button>
-
-
-
-      <!-- Mobile menu button -->
-      <button class="nav-icon-btn mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
-        <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="4" y1="6" x2="20" y2="6"></line>
-          <line x1="4" y1="12" x2="20" y2="12"></line>
-          <line x1="4" y1="18" x2="20" y2="18"></line>
-        </svg>
-        <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
+    <div class="flex flex-col gap-2 pt-6 border-t border-white/10">
+      <span class="text-sm text-white/50 uppercase tracking-widest">Inquiries</span>
+      <a href="mailto:hello@lowkeydevs.com" class="text-lg text-[#fffddb]">hello@lowkeydevs.com</a>
     </div>
   </div>
 </header>
 
-<!-- Mobile Drawer -->
-<div class="mobile-drawer-overlay" id="mobile-drawer-overlay">
-  <nav class="mobile-drawer" aria-label="Mobile navigation">
-    <div class="mobile-drawer-header">
-      <div class="logo">
-        <Icon name="Logo" size={26} class="logo-icon" />
-        <span class="logo-text">Lowkey<span class="logo-accent">devs</span></span>
-      </div>
-      <button class="nav-icon-btn" id="mobile-drawer-close" aria-label="Close menu">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
-    </div>
-    
-    <div class="mobile-drawer-body">
-      <div class="mobile-nav-links">
-        <a href="/" class="mobile-nav-link">Home</a>
-        <a href="/about" class="mobile-nav-link">About</a>
-        <a href="/privacy" class="mobile-nav-link">Privacy</a>
-      </div>
-
-      <div class="drawer-divider"></div>
-
-      <div class="drawer-categories-section">
-        <div class="drawer-section-header">
-          <h3 class="drawer-section-title">Categories</h3>
-        </div>
-
-        <div class="drawer-search-wrapper">
-          <Icon name="Search" class="drawer-search-icon" size={14} />
-          <input
-            type="text"
-            id="drawer-search"
-            placeholder="Search categories..."
-            autocomplete="off"
-            aria-label="Search categories"
-          />
-        </div>
-
-        <div class="drawer-categories-list" id="drawer-categories-list">
-          {categories.map(cat => (
-            <a 
-              href={`/tools/category/${cat.slug}`} 
-              class="drawer-category-item" 
-              data-category-title={cat.title.toLowerCase()} 
-              data-category-desc={cat.description.toLowerCase()}
-            >
-              <span class="drawer-category-icon">
-                <Icon name={cat.icon} size={16} />
-              </span>
-              <span class="drawer-category-title">{cat.title}</span>
-              <span class="drawer-category-chevron">
-                <Icon name="ChevronRight" size={14} />
-              </span>
-            </a>
-          ))}
-        </div>
-        <div class="drawer-categories-empty" id="drawer-categories-empty" style="display: none;">
-          No categories found.
-        </div>
-      </div>
-    </div>
-  </nav>
-</div>
-
-<!-- Search Overlay Modal -->
-<div class="search-overlay" id="search-overlay">
-  <div class="search-modal">
-    <div class="search-modal-header">
-      <div class="search-modal-input-wrapper">
-        <Icon name="Search" class="search-modal-icon" size={18} />
-        <input
-          type="text"
-          id="search-input"
-          placeholder="Search tools..."
-          autocomplete="off"
-          aria-label="Search tools"
-        />
-      </div>
-      <button class="search-close-btn" id="search-close-btn" aria-label="Close search">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
-    </div>
-
-    <!-- Results Container -->
-    <div class="search-results" id="search-results" hidden>
-      <ul id="results-list" role="listbox" aria-label="Search results"></ul>
-      <div class="search-empty" id="search-empty" hidden>
-        No tools found. Try a different search term.
-      </div>
-    </div>
-  </div>
-</div>
-
-<script define:vars={{ searchIndex }}>
-  // --- Header scroll behavior ---
+<script>
+  // Handle Sticky Nav Scroll State
   const header = document.getElementById('site-header');
-  let ticking = false;
+  const servicesToggle = document.getElementById('services-toggle');
+  const servicesSubnav = document.getElementById('services-subnav');
+  const servicesChevron = document.getElementById('services-chevron');
+  const mobileToggle = document.getElementById('mobile-toggle');
+  const mobileClose = document.getElementById('mobile-close');
+  const mobileMenu = document.getElementById('mobile-menu');
 
-  function updateHeader() {
-    if (window.scrollY > 10) {
-      header?.classList.add('scrolled');
+  const onScroll = () => {
+    if (window.scrollY > 150) {
+      header?.classList.add('is-scrolled');
     } else {
-      header?.classList.remove('scrolled');
+      header?.classList.remove('is-scrolled');
     }
-    ticking = false;
-  }
+  };
 
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(updateHeader);
-      ticking = true;
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Accordion Toggle
+  servicesToggle?.addEventListener('click', () => {
+    const isOpen = servicesSubnav?.classList.toggle('is-open');
+    if (servicesChevron) {
+      servicesChevron.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
     }
-  }, { passive: true });
+    servicesToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
 
-  updateHeader();
-
-  // --- Mobile Drawer ---
-  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-  const mobileDrawerOverlay = document.getElementById('mobile-drawer-overlay');
-  const mobileDrawerClose = document.getElementById('mobile-drawer-close');
-  const drawerSearchInput = document.getElementById('drawer-search');
-  const drawerCategoriesList = document.getElementById('drawer-categories-list');
-  const drawerCategoriesEmpty = document.getElementById('drawer-categories-empty');
-  const drawerCategoryItems = drawerCategoriesList ? drawerCategoriesList.getElementsByClassName('drawer-category-item') : [];
-
-  function openDrawer() {
-    mobileDrawerOverlay?.classList.add('active');
-    mobileMenuBtn?.setAttribute('aria-expanded', 'true');
+  // Mobile Drawer Toggle
+  mobileToggle?.addEventListener('click', () => {
+    mobileMenu?.classList.add('is-open');
+    mobileMenu?.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-  }
+  });
 
-  function closeDrawer() {
-    mobileDrawerOverlay?.classList.remove('active');
-    mobileMenuBtn?.setAttribute('aria-expanded', 'false');
+  const closeMobile = () => {
+    mobileMenu?.classList.remove('is-open');
+    mobileMenu?.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
-    
-    // Reset search input and category visibility on close
-    if (drawerSearchInput) {
-      drawerSearchInput.value = '';
-    }
-    for (let i = 0; i < drawerCategoryItems.length; i++) {
-      drawerCategoryItems[i].style.display = '';
-    }
-    if (drawerCategoriesEmpty) {
-      drawerCategoriesEmpty.style.display = 'none';
-    }
-  }
+  };
 
-  mobileMenuBtn?.addEventListener('click', openDrawer);
-  mobileDrawerClose?.addEventListener('click', closeDrawer);
-
-  mobileDrawerOverlay?.addEventListener('click', (e) => {
-    if (e.target === mobileDrawerOverlay) closeDrawer();
-  });
-
-  // Category filtering inside mobile drawer
-  drawerSearchInput?.addEventListener('input', (e) => {
-    const term = e.target.value.trim().toLowerCase();
-    let hasVisible = false;
-
-    for (let i = 0; i < drawerCategoryItems.length; i++) {
-      const item = drawerCategoryItems[i];
-      const title = item.getAttribute('data-category-title') || '';
-      const desc = item.getAttribute('data-category-desc') || '';
-      
-      if (title.includes(term) || desc.includes(term)) {
-        item.style.display = '';
-        hasVisible = true;
-      } else {
-        item.style.display = 'none';
-      }
-    }
-
-    if (drawerCategoriesEmpty) {
-      drawerCategoriesEmpty.style.display = hasVisible ? 'none' : 'block';
-    }
-  });
-
-  // --- Search Overlay ---
-  const searchToggleBtn = document.getElementById('search-toggle-btn');
-  const searchCloseBtn = document.getElementById('search-close-btn');
-  const searchOverlay = document.getElementById('search-overlay');
-  const searchInput = document.getElementById('search-input');
-  const resultsContainer = document.getElementById('search-results');
-  const resultsList = document.getElementById('results-list');
-  const searchEmpty = document.getElementById('search-empty');
-
-  let activeIndex = -1;
-  let items = [];
-
-  function openSearch() {
-    searchOverlay?.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    setTimeout(() => {
-      searchInput?.focus();
-    }, 50);
-  }
-
-  function closeSearch() {
-    searchOverlay?.classList.remove('active');
-    document.body.style.overflow = '';
-    if (searchInput) searchInput.value = '';
-    hideResults();
-    searchInput?.blur();
-  }
-
-  searchToggleBtn?.addEventListener('click', openSearch);
-  searchCloseBtn?.addEventListener('click', closeSearch);
-
-  searchOverlay?.addEventListener('click', (e) => {
-    if (e.target === searchOverlay) closeSearch();
-  });
-
-  // Keyboard triggers: '/' to open, Escape to close
-  document.addEventListener('keydown', (e) => {
-    if (e.key === '/' && document.activeElement !== searchInput) {
-      e.preventDefault();
-      openSearch();
-    } else if (e.key === 'Escape') {
-      if (searchOverlay?.classList.contains('active')) {
-        closeSearch();
-      } else if (mobileDrawerOverlay?.classList.contains('active')) {
-        closeDrawer();
-      }
-    }
-  });
-
-  function performSearch(query) {
-    const term = query.trim().toLowerCase();
-    if (!term) {
-      hideResults();
-      return;
-    }
-
-    const filtered = searchIndex.filter(tool => {
-      return (
-        tool.title.toLowerCase().includes(term) ||
-        tool.description.toLowerCase().includes(term) ||
-        tool.category.toLowerCase().includes(term) ||
-        tool.keywords.some(kw => kw.toLowerCase().includes(term))
-      );
-    });
-
-    renderResults(filtered);
-  }
-
-  function renderResults(results) {
-    resultsList.innerHTML = '';
-    activeIndex = -1;
-
-    if (results.length === 0) {
-      searchEmpty?.removeAttribute('hidden');
-      resultsList.style.display = 'none';
-      resultsContainer?.removeAttribute('hidden');
-      items = [];
-      return;
-    }
-
-    searchEmpty?.setAttribute('hidden', 'true');
-    resultsList.style.display = 'block';
-    resultsContainer?.removeAttribute('hidden');
-
-    results.forEach((tool, idx) => {
-      const li = document.createElement('li');
-      li.className = 'search-item';
-      li.setAttribute('role', 'option');
-      li.id = `search-item-${idx}`;
-
-      li.innerHTML = `
-        <a href="/tools/${tool.slug}">
-          <div style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; color: var(--accent); flex-shrink: 0;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
-              <path d="M9 17H7A2 2 0 0 1 5 15V9A2 2 0 0 1 7 7h2"/>
-              <path d="m15 7 5 5-5 5"/>
-            </svg>
-          </div>
-          <span style="font-weight: 500; font-size: 14px;">${tool.title}</span>
-        </a>
-      `;
-      resultsList.appendChild(li);
-    });
-
-    items = resultsList.querySelectorAll('.search-item');
-  }
-
-  function hideResults() {
-    resultsContainer?.setAttribute('hidden', 'true');
-    activeIndex = -1;
-  }
-
-  // Keyboard navigation inside search results
-  searchInput?.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      if (items.length === 0) return;
-      if (activeIndex !== -1) items[activeIndex].classList.remove('active');
-      activeIndex = (activeIndex + 1) % items.length;
-      items[activeIndex].classList.add('active');
-      items[activeIndex].scrollIntoView({ block: 'nearest' });
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      if (items.length === 0) return;
-      if (activeIndex !== -1) items[activeIndex].classList.remove('active');
-      activeIndex = (activeIndex - 1 + items.length) % items.length;
-      items[activeIndex].classList.add('active');
-      items[activeIndex].scrollIntoView({ block: 'nearest' });
-    } else if (e.key === 'Enter') {
-      if (activeIndex !== -1 && items[activeIndex]) {
-        e.preventDefault();
-        items[activeIndex].querySelector('a')?.click();
-      }
-    } else if (e.key === 'Escape') {
-      closeSearch();
-    }
-  });
-
-  searchInput?.addEventListener('input', (e) => {
-    performSearch(e.target.value);
+  mobileClose?.addEventListener('click', closeMobile);
+  document.querySelectorAll('.mm__link').forEach(link => {
+    link.addEventListener('click', closeMobile);
   });
 </script>
-

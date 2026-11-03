@@ -123,11 +123,11 @@ import ExtractPdfPagesUI from '../../tools/list/extract-pdf-pages/ui.astro';
 import PdfFormsUI from '../../tools/list/pdf-forms/ui.astro';
 import RedactPdfUI from '../../tools/list/redact-pdf/ui.astro';
 
-// New tool UI imports
 import JWTDebuggerUI from '../../tools/list/jwt-debugger/ui.astro';
 import SQLFormatterUI from '../../tools/list/sql-formatter/ui.astro';
 import CronExpressionDescriptorUI from '../../tools/list/cron-expression-descriptor/ui.astro';
 import UsernameAvailabilityCheckerUI from '../../tools/list/username-availability-checker/ui.astro';
+import InstagramSansTextGeneratorUI from '../../tools/list/instagram-sans-text-generator/ui.astro';
 
 
 // Map slugs to UI components
@@ -247,7 +247,8 @@ const uiComponents: Record<string, any> = {
   'jwt-debugger': JWTDebuggerUI,
   'sql-formatter': SQLFormatterUI,
   'cron-expression-descriptor': CronExpressionDescriptorUI,
-  'username-availability-checker': UsernameAvailabilityCheckerUI
+  'username-availability-checker': UsernameAvailabilityCheckerUI,
+  'instagram-sans-text-generator': InstagramSansTextGeneratorUI
 };
 
 export async function getStaticPaths() {

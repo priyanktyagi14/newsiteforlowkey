@@ -1,0 +1,1656 @@
+---
+import Icon from '../../../components/base/Icon.astro';
+import { FONT_VARIANTS, PREVIEW_THEMES } from './logic';
+
+const variants = Object.values(FONT_VARIANTS);
+const themes = PREVIEW_THEMES;
+---
+
+<instagram-sans-tool class="tool-workspace">
+  <!-- Informational Banner -->
+  <div class="info-banner glass-panel">
+    <div class="banner-left">
+      <span class="badge badge-purple">
+        <Icon name="Lock" size={13} />
+        Client-side • No data uploaded
+      </span>
+      <span class="badge badge-subtle">
+        Instagram Sans-style alternative preview
+      </span>
+    </div>
+    <div class="banner-right">
+      <span class="banner-hint">Visual typeface preview • 100% private in-browser</span>
+    </div>
+  </div>
+
+  <div class="editor-grid">
+    <!-- LEFT COLUMN: Input & Controls -->
+    <div class="left-column">
+      <!-- Input Card -->
+      <div class="editor-pane glass-panel input-card">
+        <div class="pane-header">
+          <div class="pane-header-title">
+            <Icon name="Sliders" size={16} class="pane-icon" />
+            <span class="pane-title">Input Text</span>
+          </div>
+          <div class="pane-header-actions">
+            <button type="button" data-action="load-sample" class="btn-text">
+              <Icon name="RefreshCw" size={13} />
+              Load Sample
+            </button>
+            <button type="button" data-action="clear" class="btn-text btn-text-danger">
+              <Icon name="Trash2" size={13} />
+              Clear
+            </button>
+          </div>
+        </div>
+
+        <div class="textarea-wrapper">
+          <textarea
+            id="ig-text-input"
+            placeholder="Type or paste your text here..."
+            aria-label="Instagram Sans Text Input"
+            rows="6"
+            spellcheck="false"
+          >✨ Living life in full color.
+Creating moments that matter every single day. 🌴</textarea>
+        </div>
+
+        <!-- Live Text Metrics Bar -->
+        <div class="stats-bar">
+          <div class="stat-chip">
+            <span class="stat-label">Characters:</span>
+            <span class="stat-val" id="stat-chars">0</span>
+          </div>
+          <div class="stat-chip">
+            <span class="stat-label">Words:</span>
+            <span class="stat-val" id="stat-words">0</span>
+          </div>
+          <div class="stat-chip">
+            <span class="stat-label">Lines:</span>
+            <span class="stat-val" id="stat-lines">0</span>
+          </div>
+          <div class="stat-chip">
+            <span class="stat-label">Emojis:</span>
+            <span class="stat-val" id="stat-emojis">0</span>
+          </div>
+        </div>
+
+        <!-- Quick Case Transform Options -->
+        <div class="case-transforms">
+          <span class="control-label-sm">Quick Casing:</span>
+          <div class="case-buttons-group">
+            <button type="button" class="btn-chip active" data-case="none">Normal</button>
+            <button type="button" class="btn-chip" data-case="uppercase">UPPERCASE</button>
+            <button type="button" class="btn-chip" data-case="lowercase">lowercase</button>
+            <button type="button" class="btn-chip" data-case="titlecase">Title Case</button>
+            <button type="button" class="btn-chip" data-case="sentencecase">Sentence case</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Typography Controls Card -->
+      <div class="editor-pane glass-panel controls-card">
+        <div class="pane-header">
+          <div class="pane-header-title">
+            <Icon name="Palette" size={16} class="pane-icon" />
+            <span class="pane-title">Typography & Style Controls</span>
+          </div>
+          <button type="button" data-action="reset-controls" class="btn-text">
+            Reset
+          </button>
+        </div>
+
+        <!-- Font Variant / Style Picker -->
+        <div class="control-group">
+          <div class="control-label-row">
+            <label class="control-label">Instagram Sans-Style Variant</label>
+            <span class="selected-variant-badge" id="selected-variant-name">Regular</span>
+          </div>
+          <div class="variant-grid">
+            {variants.map(v => (
+              <button
+                type="button"
+                class={`variant-btn ${v.key === 'regular' ? 'active' : ''}`}
+                data-variant={v.key}
+                title={v.description}
+              >
+                <span class="variant-btn-name">{v.name.replace('Instagram Sans ', '')}</span>
+                <span class="variant-btn-badge">{v.badge}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <!-- Font Size Slider -->
+        <div class="control-group">
+          <div class="control-label-row">
+            <label for="font-size-slider" class="control-label">Font Size</label>
+            <span class="range-val" id="font-size-val">28px</span>
+          </div>
+          <div class="slider-row">
+            <input
+              type="range"
+              id="font-size-slider"
+              min="14"
+              max="64"
+              value="28"
+              step="1"
+              class="range-slider"
+              aria-label="Font Size"
+            />
+            <div class="quick-presets">
+              <button type="button" class="btn-preset" data-size="18">18px</button>
+              <button type="button" class="btn-preset active" data-size="28">28px</button>
+              <button type="button" class="btn-preset" data-size="40">40px</button>
+              <button type="button" class="btn-preset" data-size="54">54px</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Letter Spacing & Line Height Sliders -->
+        <div class="sliders-dual-grid">
+          <div class="control-group">
+            <div class="control-label-row">
+              <label for="letter-spacing-slider" class="control-label">Letter Spacing</label>
+              <span class="range-val" id="letter-spacing-val">0.00em</span>
+            </div>
+            <input
+              type="range"
+              id="letter-spacing-slider"
+              min="-0.05"
+              max="0.25"
+              value="0"
+              step="0.01"
+              class="range-slider"
+              aria-label="Letter Spacing"
+            />
+          </div>
+
+          <div class="control-group">
+            <div class="control-label-row">
+              <label for="line-height-slider" class="control-label">Line Height</label>
+              <span class="range-val" id="line-height-val">1.40</span>
+            </div>
+            <input
+              type="range"
+              id="line-height-slider"
+              min="1.0"
+              max="2.2"
+              value="1.4"
+              step="0.05"
+              class="range-slider"
+              aria-label="Line Height"
+            />
+          </div>
+        </div>
+
+        <!-- Alignment & Background Theme Controls -->
+        <div class="controls-bottom-grid">
+          <!-- Alignment -->
+          <div class="control-group">
+            <label class="control-label">Text Alignment</label>
+            <div class="align-buttons-group">
+              <button type="button" class="btn-align active" data-align="left" aria-label="Align Left">Left</button>
+              <button type="button" class="btn-align" data-align="center" aria-label="Align Center">Center</button>
+              <button type="button" class="btn-align" data-align="right" aria-label="Align Right">Right</button>
+              <button type="button" class="btn-align" data-align="justify" aria-label="Justify">Justify</button>
+            </div>
+          </div>
+
+          <!-- Story Sticker Background Bubble -->
+          <div class="control-group">
+            <label class="control-label">Story Sticker Pill</label>
+            <div class="sticker-toggle-group">
+              <button type="button" class="btn-sticker active" data-sticker="none">None</button>
+              <button type="button" class="btn-sticker" data-sticker="dark-pill">Dark Pill</button>
+              <button type="button" class="btn-sticker" data-sticker="white-pill">White Pill</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Canvas Background Theme -->
+        <div class="control-group">
+          <label class="control-label">Canvas Background Theme</label>
+          <div class="theme-picker-row">
+            {themes.map(t => (
+              <button
+                type="button"
+                class={`theme-circle-btn ${t.id === 'dark' ? 'active' : ''}`}
+                data-theme-id={t.id}
+                title={t.name}
+                aria-label={`Select ${t.name} background`}
+                style={`background: ${t.background}; ${t.border ? `border: 1px solid ${t.border};` : ''}`}
+              >
+                <span class="theme-check-icon">✓</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN: Live Typography Preview & Story Simulator -->
+    <div class="right-column">
+      <div class="editor-pane glass-panel preview-card">
+        <!-- Preview Header & View Mode Switcher -->
+        <div class="preview-header">
+          <div class="preview-tabs">
+            <button type="button" class="preview-tab-btn active" data-view="canvas">
+              Direct Preview
+            </button>
+            <button type="button" class="preview-tab-btn" data-view="story">
+              Story Simulator
+            </button>
+          </div>
+
+          <div class="preview-actions">
+            <button type="button" id="copy-btn" class="btn btn-primary btn-copy">
+              <span class="copy-icon-wrap">
+                <Icon name="Clipboard" size={15} class="icon-clipboard" />
+                <Icon name="Check" size={15} class="icon-check" />
+              </span>
+              <span class="copy-btn-text">Copy Text</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- VIEW 1: Direct Canvas Preview -->
+        <div id="canvas-view-container" class="preview-view-container active">
+          <div
+            id="typography-canvas"
+            class="typography-canvas font-ig-regular theme-dark"
+          >
+            <div id="canvas-text-wrapper" class="canvas-text-wrapper sticker-none">
+              <div id="rendered-text-content" class="rendered-text-content">✨ Living life in full color.
+Creating moments that matter every single day. 🌴</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VIEW 2: Instagram Story Live Simulator -->
+        <div id="story-view-container" class="preview-view-container">
+          <div class="story-mockup-phone">
+            <!-- Simulated Phone Top Bar -->
+            <div class="phone-status-bar">
+              <span class="status-time">9:41</span>
+              <div class="status-notch"></div>
+              <div class="status-icons">
+                <span class="status-signal">••••</span>
+                <span class="status-battery">100%</span>
+              </div>
+            </div>
+
+            <!-- Instagram Story Header -->
+            <div class="story-header-bar">
+              <div class="story-user-meta">
+                <div class="story-avatar-ring">
+                  <div class="story-avatar-img"></div>
+                </div>
+                <div class="story-user-info">
+                  <span class="story-username">your_story</span>
+                  <span class="story-timestamp">2h ago</span>
+                </div>
+              </div>
+              <div class="story-header-controls">
+                <span class="story-dots">•••</span>
+                <span class="story-close">✕</span>
+              </div>
+            </div>
+
+            <!-- Story Body Canvas with Interactive Text -->
+            <div id="story-body-canvas" class="story-body-canvas theme-ig-sunset">
+              <div id="story-text-wrapper" class="story-text-wrapper font-ig-regular sticker-none">
+                <div id="story-rendered-text" class="story-rendered-text">✨ Living life in full color.
+Creating moments that matter every single day. 🌴</div>
+              </div>
+            </div>
+
+            <!-- Instagram Story Footer Bar -->
+            <div class="story-footer-bar">
+              <div class="story-message-input">Send message...</div>
+              <div class="story-reaction-icon">❤️</div>
+              <div class="story-reaction-icon">✈️</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Copy Explanatory Notice Banner -->
+        <div class="copy-notice-box">
+          <div class="notice-icon">
+            <Icon name="Info" size={14} />
+          </div>
+          <p class="notice-text">
+            <strong>How copying works:</strong> Clicking "Copy Text" copies standard, universal Unicode text to your clipboard. The Instagram Sans styling is rendered visually in your browser via CSS webfonts.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</instagram-sans-tool>
+
+<style>
+  /* --- Google Fonts Import for Visual Instagram Sans-Style Typeface Metrics --- */
+  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Syne:wght@600;700;800&display=swap');
+
+  :root {
+    /* Configurable font-family stacks */
+    --generator-font-family: "Instagram Sans", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --generator-font-headline: "Instagram Sans Headline", "Syne", "Outfit", sans-serif;
+    --generator-font-rounded: "Instagram Sans Rounded", "Outfit", "Plus Jakarta Sans", sans-serif;
+    --generator-font-script: "Instagram Sans Script", "Caveat", cursive, sans-serif;
+  }
+
+  .tool-workspace {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  /* Informational Banner */
+  .info-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--radius-lg);
+    background: rgba(18, 18, 24, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .banner-left {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.3rem 0.65rem;
+    border-radius: var(--radius-full);
+  }
+
+  .badge-purple {
+    background: rgba(139, 92, 246, 0.15);
+    color: #c4b5fd;
+    border: 1px solid rgba(139, 92, 246, 0.3);
+  }
+
+  .badge-subtle {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-secondary, #94a3b8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .banner-hint {
+    font-size: 0.8rem;
+    color: var(--text-muted, #64748b);
+  }
+
+  /* Two Column Editor Grid */
+  .editor-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  @media (max-width: 1024px) {
+    .editor-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .right-column {
+    position: sticky;
+    top: 1.5rem;
+  }
+
+  @media (max-width: 1024px) {
+    .right-column {
+      position: static;
+    }
+  }
+
+  /* Glass Panel / Card Base */
+  .editor-pane {
+    background: rgba(18, 18, 24, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-xl);
+    padding: 1.35rem;
+    backdrop-filter: blur(16px);
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .editor-pane:hover {
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+
+  /* Header inside cards */
+  .pane-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 0.85rem;
+  }
+
+  .pane-header-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .pane-icon {
+    color: var(--primary-accent, #a855f7);
+  }
+
+  .pane-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #f1f5f9;
+    letter-spacing: -0.01em;
+  }
+
+  .pane-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .btn-text {
+    background: none;
+    border: none;
+    color: var(--primary-accent, #c084fc);
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-sm);
+    transition: all 0.15s ease;
+  }
+
+  .btn-text:hover {
+    color: #e9d5ff;
+    background: rgba(168, 85, 247, 0.1);
+  }
+
+  .btn-text-danger {
+    color: #f87171;
+  }
+
+  .btn-text-danger:hover {
+    color: #fca5a5;
+    background: rgba(239, 68, 68, 0.12);
+  }
+
+  /* Textarea Input */
+  .textarea-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  #ig-text-input {
+    width: 100%;
+    min-height: 130px;
+    padding: 0.95rem 1rem;
+    background: rgba(10, 10, 15, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    color: #f8fafc;
+    font-family: var(--generator-font-family);
+    font-size: 1rem;
+    line-height: 1.5;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  #ig-text-input:focus {
+    border-color: var(--primary-accent, #a855f7);
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
+  }
+
+  #ig-text-input::placeholder {
+    color: #475569;
+  }
+
+  /* Stats Bar */
+  .stats-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .stat-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+  }
+
+  .stat-label {
+    color: #94a3b8;
+  }
+
+  .stat-val {
+    color: #e2e8f0;
+    font-weight: 600;
+    font-family: var(--font-mono, monospace);
+  }
+
+  /* Quick Casing Group */
+  .case-transforms {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding-top: 0.25rem;
+  }
+
+  .control-label-sm {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #94a3b8;
+  }
+
+  .case-buttons-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .btn-chip {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #cbd5e1;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.65rem;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .btn-chip:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .btn-chip.active {
+    background: rgba(168, 85, 247, 0.2);
+    border-color: rgba(168, 85, 247, 0.5);
+    color: #e9d5ff;
+    font-weight: 600;
+  }
+
+  /* Control Groups */
+  .control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .control-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .control-label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #cbd5e1;
+  }
+
+  .selected-variant-badge {
+    font-size: 0.72rem;
+    background: rgba(168, 85, 247, 0.18);
+    color: #d8b4fe;
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+  }
+
+  .range-val {
+    font-size: 0.8rem;
+    color: var(--primary-accent, #c084fc);
+    font-family: var(--font-mono, monospace);
+    font-weight: 600;
+  }
+
+  /* Font Variant Picker Grid */
+  .variant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .variant-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.6rem 0.75rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.18s ease;
+    gap: 0.2rem;
+  }
+
+  .variant-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.18);
+    transform: translateY(-1px);
+  }
+
+  .variant-btn.active {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(126, 34, 206, 0.2));
+    border-color: var(--primary-accent, #a855f7);
+    box-shadow: 0 0 16px rgba(168, 85, 247, 0.2);
+  }
+
+  .variant-btn-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #f1f5f9;
+  }
+
+  .variant-btn-badge {
+    font-size: 0.68rem;
+    color: #94a3b8;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
+  }
+
+  .variant-btn.active .variant-btn-badge {
+    color: #e9d5ff;
+    background: rgba(168, 85, 247, 0.3);
+  }
+
+  /* Range Sliders */
+  .slider-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .range-slider {
+    flex: 1;
+    height: 6px;
+    appearance: none;
+    -webkit-appearance: none;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-full);
+    outline: none;
+    cursor: pointer;
+  }
+
+  .range-slider::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--primary-accent, #a855f7);
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+    transition: transform 0.15s ease;
+  }
+
+  .range-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+  }
+
+  .quick-presets {
+    display: flex;
+    gap: 0.3rem;
+  }
+
+  .btn-preset {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #94a3b8;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.45rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .btn-preset:hover, .btn-preset.active {
+    background: rgba(168, 85, 247, 0.2);
+    border-color: rgba(168, 85, 247, 0.4);
+    color: #f1f5f9;
+  }
+
+  .sliders-dual-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    .sliders-dual-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .controls-bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    .controls-bottom-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Alignment Buttons */
+  .align-buttons-group, .sticker-toggle-group {
+    display: flex;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: 0.2rem;
+    gap: 0.2rem;
+  }
+
+  .btn-align, .btn-sticker {
+    flex: 1;
+    background: none;
+    border: none;
+    color: #94a3b8;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.35rem 0.2rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-align: center;
+  }
+
+  .btn-align:hover, .btn-sticker:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .btn-align.active, .btn-sticker.active {
+    background: rgba(168, 85, 247, 0.25);
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  /* Theme Pickers */
+  .theme-picker-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    align-items: center;
+  }
+
+  .theme-circle-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .theme-circle-btn:hover {
+    transform: scale(1.12);
+  }
+
+  .theme-circle-btn.active {
+    box-shadow: 0 0 0 2px #ffffff, 0 0 12px rgba(168, 85, 247, 0.6);
+    transform: scale(1.08);
+  }
+
+  .theme-check-icon {
+    display: none;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  }
+
+  .theme-circle-btn.active .theme-check-icon {
+    display: block;
+  }
+
+  /* ================= RIGHT COLUMN: PREVIEW CARD ================= */
+  .preview-card {
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.25rem;
+  }
+
+  .preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 0.75rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .preview-tabs {
+    display: flex;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-full);
+    padding: 0.2rem;
+    gap: 0.2rem;
+  }
+
+  .preview-tab-btn {
+    background: none;
+    border: none;
+    color: #94a3b8;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.35rem 0.85rem;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .preview-tab-btn:hover {
+    color: #ffffff;
+  }
+
+  .preview-tab-btn.active {
+    background: var(--primary-accent, #a855f7);
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(168, 85, 247, 0.4);
+  }
+
+  /* Copy Button */
+  .btn-copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: linear-gradient(135deg, #9333ea, #7c3aed);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 0.5rem 1.1rem;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(147, 51, 234, 0.35);
+    transition: all 0.2s ease;
+  }
+
+  .btn-copy:hover {
+    background: linear-gradient(135deg, #a855f7, #9333ea);
+    box-shadow: 0 6px 20px rgba(147, 51, 234, 0.5);
+    transform: translateY(-1px);
+  }
+
+  .btn-copy:active {
+    transform: translateY(0);
+  }
+
+  .btn-copy.copied {
+    background: linear-gradient(135deg, #10b981, #059669) !important;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4) !important;
+  }
+
+  .copy-icon-wrap {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    width: 15px;
+    height: 15px;
+  }
+
+  .icon-check {
+    display: none;
+  }
+
+  .btn-copy.copied .icon-clipboard {
+    display: none;
+  }
+
+  .btn-copy.copied .icon-check {
+    display: inline-block;
+  }
+
+  /* Preview View Containers */
+  .preview-view-container {
+    display: none;
+    width: 100%;
+    flex: 1;
+  }
+
+  .preview-view-container.active {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Canvas Direct View */
+  .typography-canvas {
+    width: 100%;
+    min-height: 380px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem 2rem;
+    transition: background 0.3s ease, color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .theme-dark {
+    background: #121218;
+    color: #f9fafb;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .theme-ig-sunset {
+    background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: #ffffff;
+  }
+
+  .theme-cyber-purple {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #9333ea 100%);
+    color: #ffffff;
+  }
+
+  .theme-midnight {
+    background: #000000;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .theme-clean-light {
+    background: #ffffff;
+    color: #0f172a;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .theme-emerald {
+    background: linear-gradient(135deg, #059669 0%, #0d9488 50%, #0891b2 100%);
+    color: #ffffff;
+  }
+
+  .canvas-text-wrapper {
+    width: 100%;
+    max-width: 100%;
+    word-break: break-word;
+    white-space: pre-wrap;
+    transition: all 0.2s ease;
+  }
+
+  .rendered-text-content {
+    font-size: 28px;
+    letter-spacing: 0em;
+    line-height: 1.4;
+    text-align: left;
+    transition: font-size 0.1s ease, letter-spacing 0.1s ease, line-height 0.1s ease;
+  }
+
+  /* Sticker Pill Styles */
+  .sticker-none {
+    background: transparent;
+    padding: 0;
+  }
+
+  .sticker-dark-pill {
+    background: rgba(0, 0, 0, 0.75);
+    color: #ffffff !important;
+    padding: 1.25rem 1.5rem;
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  .sticker-white-pill {
+    background: rgba(255, 255, 255, 0.95);
+    color: #0f172a !important;
+    padding: 1.25rem 1.5rem;
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Font Variant Class Mappings */
+  .font-ig-regular {
+    font-family: var(--generator-font-family);
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .font-ig-medium {
+    font-family: var(--generator-font-family);
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  .font-ig-bold {
+    font-family: var(--generator-font-family);
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  .font-ig-heavy {
+    font-family: var(--generator-font-family);
+    font-weight: 800;
+    font-style: normal;
+  }
+
+  .font-ig-headline {
+    font-family: var(--generator-font-headline);
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  .font-ig-rounded {
+    font-family: var(--generator-font-rounded);
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  .font-ig-script {
+    font-family: var(--generator-font-script);
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  /* ================= STORY SIMULATOR PHONE MOCKUP ================= */
+  .story-mockup-phone {
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
+    background: #000000;
+    border-radius: 36px;
+    border: 3px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .phone-status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 1.25rem 0.3rem;
+    font-size: 0.72rem;
+    color: #ffffff;
+    font-weight: 600;
+    z-index: 10;
+  }
+
+  .status-notch {
+    width: 80px;
+    height: 14px;
+    background: #1e1e24;
+    border-radius: 10px;
+  }
+
+  .story-header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    z-index: 10;
+  }
+
+  .story-user-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .story-avatar-ring {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    padding: 2px;
+  }
+
+  .story-avatar-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #334155;
+    background-image: radial-gradient(circle at 50% 30%, #818cf8, #4f46e5);
+  }
+
+  .story-user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .story-username {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  .story-timestamp {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .story-header-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: #ffffff;
+    font-size: 0.85rem;
+  }
+
+  .story-body-canvas {
+    min-height: 340px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.25rem;
+    transition: background 0.3s ease;
+    overflow: hidden;
+  }
+
+  .story-text-wrapper {
+    width: 100%;
+    word-break: break-word;
+    white-space: pre-wrap;
+    transition: all 0.2s ease;
+  }
+
+  .story-rendered-text {
+    font-size: 22px;
+    line-height: 1.4;
+    text-align: center;
+    transition: font-size 0.1s ease;
+  }
+
+  .story-footer-bar {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem 1.1rem;
+    gap: 0.75rem;
+    z-index: 10;
+  }
+
+  .story-message-input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-full);
+    padding: 0.45rem 0.9rem;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .story-reaction-icon {
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+
+  /* Copy Notice Box */
+  .copy-notice-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.75rem 1rem;
+    background: rgba(147, 51, 234, 0.08);
+    border: 1px solid rgba(147, 51, 234, 0.2);
+    border-radius: var(--radius-lg);
+    margin-top: auto;
+  }
+
+  .notice-icon {
+    color: var(--primary-accent, #c084fc);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .notice-text {
+    font-size: 0.75rem;
+    color: #cbd5e1;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  .notice-text strong {
+    color: #f1f5f9;
+  }
+</style>
+
+<script>
+  import {
+    calculateTextStats,
+    applyCaseTransform,
+    copyTextToClipboard,
+    FONT_VARIANTS,
+    PREVIEW_THEMES,
+    SAMPLE_TEXTS,
+    type FontVariantKey,
+    type CaseTransform
+  } from './logic';
+
+  class InstagramSansTool extends HTMLElement {
+    private textInput: HTMLTextAreaElement | null = null;
+    private statChars: HTMLElement | null = null;
+    private statWords: HTMLElement | null = null;
+    private statLines: HTMLElement | null = null;
+    private statEmojis: HTMLElement | null = null;
+
+    private fontSizeSlider: HTMLInputElement | null = null;
+    private fontSizeVal: HTMLElement | null = null;
+    private letterSpacingSlider: HTMLInputElement | null = null;
+    private letterSpacingVal: HTMLElement | null = null;
+    private lineHeightSlider: HTMLInputElement | null = null;
+    private lineHeightVal: HTMLElement | null = null;
+
+    private selectedVariantName: HTMLElement | null = null;
+    private renderedTextContent: HTMLElement | null = null;
+    private storyRenderedText: HTMLElement | null = null;
+    private canvasTextWrapper: HTMLElement | null = null;
+    private storyTextWrapper: HTMLElement | null = null;
+    private typographyCanvas: HTMLElement | null = null;
+    private storyBodyCanvas: HTMLElement | null = null;
+
+    private copyBtn: HTMLButtonElement | null = null;
+    private copyBtnText: HTMLElement | null = null;
+
+    private currentVariant: FontVariantKey = 'regular';
+    private currentCase: CaseTransform = 'none';
+    private currentAlign: string = 'left';
+    private currentSticker: string = 'none';
+    private currentThemeId: string = 'dark';
+    private sampleIndex: number = 0;
+
+    connectedCallback() {
+      this.initElements();
+      this.bindEvents();
+      this.updateAll();
+    }
+
+    private initElements() {
+      this.textInput = this.querySelector('#ig-text-input');
+      this.statChars = this.querySelector('#stat-chars');
+      this.statWords = this.querySelector('#stat-words');
+      this.statLines = this.querySelector('#stat-lines');
+      this.statEmojis = this.querySelector('#stat-emojis');
+
+      this.fontSizeSlider = this.querySelector('#font-size-slider');
+      this.fontSizeVal = this.querySelector('#font-size-val');
+      this.letterSpacingSlider = this.querySelector('#letter-spacing-slider');
+      this.letterSpacingVal = this.querySelector('#letter-spacing-val');
+      this.lineHeightSlider = this.querySelector('#line-height-slider');
+      this.lineHeightVal = this.querySelector('#line-height-val');
+
+      this.selectedVariantName = this.querySelector('#selected-variant-name');
+      this.renderedTextContent = this.querySelector('#rendered-text-content');
+      this.storyRenderedText = this.querySelector('#story-rendered-text');
+      this.canvasTextWrapper = this.querySelector('#canvas-text-wrapper');
+      this.storyTextWrapper = this.querySelector('#story-text-wrapper');
+      this.typographyCanvas = this.querySelector('#typography-canvas');
+      this.storyBodyCanvas = this.querySelector('#story-body-canvas');
+
+      this.copyBtn = this.querySelector('#copy-btn');
+      this.copyBtnText = this.querySelector('.copy-btn-text');
+    }
+
+    private bindEvents() {
+      // Input typing & stats update
+      this.textInput?.addEventListener('input', () => this.updateAll());
+
+      // Load sample button
+      const loadSampleBtn = this.querySelector('[data-action="load-sample"]');
+      loadSampleBtn?.addEventListener('click', () => {
+        this.sampleIndex = (this.sampleIndex + 1) % SAMPLE_TEXTS.length;
+        if (this.textInput) {
+          this.textInput.value = SAMPLE_TEXTS[this.sampleIndex];
+          this.updateAll();
+        }
+      });
+
+      // Clear button
+      const clearBtn = this.querySelector('[data-action="clear"]');
+      clearBtn?.addEventListener('click', () => {
+        if (this.textInput) {
+          this.textInput.value = '';
+          this.textInput.focus();
+          this.updateAll();
+        }
+      });
+
+      // Reset controls
+      const resetBtn = this.querySelector('[data-action="reset-controls"]');
+      resetBtn?.addEventListener('click', () => this.resetControls());
+
+      // Case buttons
+      const caseButtons = this.querySelectorAll<HTMLButtonElement>('[data-case]');
+      caseButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          caseButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          this.currentCase = (btn.getAttribute('data-case') as CaseTransform) || 'none';
+          this.updateRenderedText();
+        });
+      });
+
+      // Font Variant buttons
+      const variantButtons = this.querySelectorAll<HTMLButtonElement>('[data-variant]');
+      variantButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          variantButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const variantKey = (btn.getAttribute('data-variant') as FontVariantKey) || 'regular';
+          this.currentVariant = variantKey;
+          if (this.selectedVariantName) {
+            this.selectedVariantName.textContent = FONT_VARIANTS[variantKey]?.name.replace('Instagram Sans ', '') || 'Regular';
+          }
+          this.updateFontVariantClasses();
+        });
+      });
+
+      // Font Size Slider & Quick Presets
+      this.fontSizeSlider?.addEventListener('input', () => {
+        const val = this.fontSizeSlider?.value || '28';
+        if (this.fontSizeVal) this.fontSizeVal.textContent = `${val}px`;
+        this.updatePresetButtons(val);
+        this.applyTypographyStyles();
+      });
+
+      const presetButtons = this.querySelectorAll<HTMLButtonElement>('[data-size]');
+      presetButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const size = btn.getAttribute('data-size') || '28';
+          if (this.fontSizeSlider) this.fontSizeSlider.value = size;
+          if (this.fontSizeVal) this.fontSizeVal.textContent = `${size}px`;
+          this.updatePresetButtons(size);
+          this.applyTypographyStyles();
+        });
+      });
+
+      // Letter Spacing Slider
+      this.letterSpacingSlider?.addEventListener('input', () => {
+        const val = parseFloat(this.letterSpacingSlider?.value || '0');
+        if (this.letterSpacingVal) this.letterSpacingVal.textContent = `${val >= 0 ? '+' : ''}${val.toFixed(2)}em`;
+        this.applyTypographyStyles();
+      });
+
+      // Line Height Slider
+      this.lineHeightSlider?.addEventListener('input', () => {
+        const val = parseFloat(this.lineHeightSlider?.value || '1.4');
+        if (this.lineHeightVal) this.lineHeightVal.textContent = val.toFixed(2);
+        this.applyTypographyStyles();
+      });
+
+      // Text Alignment Buttons
+      const alignButtons = this.querySelectorAll<HTMLButtonElement>('[data-align]');
+      alignButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          alignButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          this.currentAlign = btn.getAttribute('data-align') || 'left';
+          this.applyTypographyStyles();
+        });
+      });
+
+      // Story Sticker Pill Toggle
+      const stickerButtons = this.querySelectorAll<HTMLButtonElement>('[data-sticker]');
+      stickerButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          stickerButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          this.currentSticker = btn.getAttribute('data-sticker') || 'none';
+          this.updateStickerPillClasses();
+        });
+      });
+
+      // Theme Picker buttons
+      const themeButtons = this.querySelectorAll<HTMLButtonElement>('[data-theme-id]');
+      themeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          themeButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          this.currentThemeId = btn.getAttribute('data-theme-id') || 'dark';
+          this.applyThemeClasses();
+        });
+      });
+
+      // View Mode Tabs (Canvas vs Story Simulator)
+      const tabButtons = this.querySelectorAll<HTMLButtonElement>('[data-view]');
+      tabButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          tabButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const view = btn.getAttribute('data-view');
+          const canvasView = this.querySelector('#canvas-view-container');
+          const storyView = this.querySelector('#story-view-container');
+          if (view === 'story') {
+            canvasView?.classList.remove('active');
+            storyView?.classList.add('active');
+          } else {
+            storyView?.classList.remove('active');
+            canvasView?.classList.add('active');
+          }
+        });
+      });
+
+      // Copy Text Action
+      this.copyBtn?.addEventListener('click', () => this.handleCopy());
+    }
+
+    private updateAll() {
+      this.updateStats();
+      this.updateRenderedText();
+      this.updateFontVariantClasses();
+      this.applyTypographyStyles();
+    }
+
+    private updateStats() {
+      const rawText = this.textInput?.value || '';
+      const stats = calculateTextStats(rawText);
+      if (this.statChars) this.statChars.textContent = String(stats.characters);
+      if (this.statWords) this.statWords.textContent = String(stats.words);
+      if (this.statLines) this.statLines.textContent = String(stats.lines);
+      if (this.statEmojis) this.statEmojis.textContent = String(stats.emojis);
+    }
+
+    private updateRenderedText() {
+      const rawText = this.textInput?.value || '';
+      const displayContent = rawText || 'Type or paste your text to preview...';
+      const transformed = applyCaseTransform(displayContent, this.currentCase);
+
+      if (this.renderedTextContent) {
+        this.renderedTextContent.textContent = transformed;
+      }
+      if (this.storyRenderedText) {
+        this.storyRenderedText.textContent = transformed;
+      }
+    }
+
+    private updateFontVariantClasses() {
+      const variant = FONT_VARIANTS[this.currentVariant];
+      const allVariantClasses = Object.values(FONT_VARIANTS).map(v => v.cssClass);
+
+      if (this.typographyCanvas) {
+        allVariantClasses.forEach(cls => this.typographyCanvas?.classList.remove(cls));
+        this.typographyCanvas.classList.add(variant.cssClass);
+      }
+
+      if (this.storyTextWrapper) {
+        allVariantClasses.forEach(cls => this.storyTextWrapper?.classList.remove(cls));
+        this.storyTextWrapper.classList.add(variant.cssClass);
+      }
+    }
+
+    private applyTypographyStyles() {
+      const fontSize = `${this.fontSizeSlider?.value || 28}px`;
+      const letterSpacing = `${this.letterSpacingSlider?.value || 0}em`;
+      const lineHeight = `${this.lineHeightSlider?.value || 1.4}`;
+      const textAlign = this.currentAlign;
+
+      if (this.renderedTextContent) {
+        this.renderedTextContent.style.fontSize = fontSize;
+        this.renderedTextContent.style.letterSpacing = letterSpacing;
+        this.renderedTextContent.style.lineHeight = lineHeight;
+        this.renderedTextContent.style.textAlign = textAlign;
+      }
+
+      if (this.storyRenderedText) {
+        // Slightly scaled down font size for the simulated phone mockup viewport
+        const numericSize = parseInt(this.fontSizeSlider?.value || '28', 10);
+        const storySize = Math.max(14, Math.min(36, Math.round(numericSize * 0.8)));
+        this.storyRenderedText.style.fontSize = `${storySize}px`;
+        this.storyRenderedText.style.letterSpacing = letterSpacing;
+        this.storyRenderedText.style.lineHeight = lineHeight;
+        this.storyRenderedText.style.textAlign = textAlign;
+      }
+    }
+
+    private updateStickerPillClasses() {
+      const allStickerClasses = ['sticker-none', 'sticker-dark-pill', 'sticker-white-pill'];
+      const targetClass = `sticker-${this.currentSticker}`;
+
+      if (this.canvasTextWrapper) {
+        allStickerClasses.forEach(c => this.canvasTextWrapper?.classList.remove(c));
+        this.canvasTextWrapper.classList.add(targetClass);
+      }
+
+      if (this.storyTextWrapper) {
+        allStickerClasses.forEach(c => this.storyTextWrapper?.classList.remove(c));
+        this.storyTextWrapper.classList.add(targetClass);
+      }
+    }
+
+    private applyThemeClasses() {
+      const allThemeClasses = PREVIEW_THEMES.map(t => `theme-${t.id}`);
+      const targetThemeClass = `theme-${this.currentThemeId}`;
+
+      if (this.typographyCanvas) {
+        allThemeClasses.forEach(c => this.typographyCanvas?.classList.remove(c));
+        this.typographyCanvas.classList.add(targetThemeClass);
+      }
+
+      if (this.storyBodyCanvas) {
+        allThemeClasses.forEach(c => this.storyBodyCanvas?.classList.remove(c));
+        this.storyBodyCanvas.classList.add(targetThemeClass);
+      }
+    }
+
+    private updatePresetButtons(currentSize: string) {
+      const presetButtons = this.querySelectorAll<HTMLButtonElement>('[data-size]');
+      presetButtons.forEach(btn => {
+        if (btn.getAttribute('data-size') === currentSize) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+    }
+
+    private resetControls() {
+      this.currentVariant = 'regular';
+      this.currentCase = 'none';
+      this.currentAlign = 'left';
+      this.currentSticker = 'none';
+      this.currentThemeId = 'dark';
+
+      if (this.fontSizeSlider) this.fontSizeSlider.value = '28';
+      if (this.fontSizeVal) this.fontSizeVal.textContent = '28px';
+      if (this.letterSpacingSlider) this.letterSpacingSlider.value = '0';
+      if (this.letterSpacingVal) this.letterSpacingVal.textContent = '0.00em';
+      if (this.lineHeightSlider) this.lineHeightSlider.value = '1.4';
+      if (this.lineHeightVal) this.lineHeightVal.textContent = '1.40';
+      if (this.selectedVariantName) this.selectedVariantName.textContent = 'Regular';
+
+      this.querySelectorAll<HTMLButtonElement>('[data-variant]').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-variant') === 'regular');
+      });
+      this.querySelectorAll<HTMLButtonElement>('[data-case]').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-case') === 'none');
+      });
+      this.querySelectorAll<HTMLButtonElement>('[data-align]').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-align') === 'left');
+      });
+      this.querySelectorAll<HTMLButtonElement>('[data-sticker]').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-sticker') === 'none');
+      });
+      this.querySelectorAll<HTMLButtonElement>('[data-theme-id]').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-theme-id') === 'dark');
+      });
+
+      this.updatePresetButtons('28');
+      this.updateFontVariantClasses();
+      this.updateStickerPillClasses();
+      this.applyThemeClasses();
+      this.applyTypographyStyles();
+      this.updateRenderedText();
+    }
+
+    private async handleCopy() {
+      const rawText = this.textInput?.value || '';
+      const textToCopy = applyCaseTransform(rawText, this.currentCase);
+
+      if (!textToCopy) return;
+
+      const success = await copyTextToClipboard(textToCopy);
+      if (success && this.copyBtn && this.copyBtnText) {
+        this.copyBtn.classList.add('copied');
+        this.copyBtnText.textContent = 'Copied ✓';
+
+        setTimeout(() => {
+          this.copyBtn?.classList.remove('copied');
+          if (this.copyBtnText) this.copyBtnText.textContent = 'Copy Text';
+        }, 2200);
+      }
+    }
+  }
+
+  if (!customElements.get('instagram-sans-tool')) {
+    customElements.define('instagram-sans-tool', InstagramSansTool);
+  }
+</script>

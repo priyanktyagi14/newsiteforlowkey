@@ -1,0 +1,96 @@
+---
+const principles = [
+  {
+    theme: 'white',
+    number: '01',
+    eyebrow: 'Principle 01 // Communication',
+    quote: '"Builders over bureaucracy."',
+    body: 'We eliminated account managers and endless status meetings. When you partner with Lowkeydevs, you communicate directly with the engineers, designers, and growth strategists executing your project.',
+    author: 'The Lowkey Standard · Core Operating Rule'
+  },
+  {
+    theme: 'red',
+    number: '02',
+    eyebrow: 'Principle 02 // Velocity',
+    quote: '"Output is the only honest metric."',
+    body: 'Agencies love billable hours; we love shipped outcomes. We measure our engagements by functional software deployed, content reaching audiences, and conversion pipelines live.',
+    author: 'The Lowkey Standard · Performance Guarantee'
+  },
+  {
+    theme: 'white',
+    number: '03',
+    eyebrow: 'Principle 03 // Craft',
+    quote: '"Zero generic templates."',
+    body: 'Cookie-cutter themes and generic AI copy dilute your brand authority. Every web application, short-form video, and visual identity we produce is custom-tailored to your unique market positioning.',
+    author: 'The Lowkey Standard · Quality Commitment'
+  },
+  {
+    theme: 'red',
+    number: '04',
+    eyebrow: 'Principle 04 // Scalability',
+    quote: '"Built for day one thousand."',
+    body: 'We don’t cut corners that cause technical debt six months later. Whether it’s edge database rules or modular motion assets, our work scales seamlessly with your business.',
+    author: 'The Lowkey Standard · Architecture Rule'
+  }
+];
+---
+
+<section class="confessions" id="principles" aria-labelledby="principles-heading">
+  <div class="confessions__header site-max">
+    <span class="text-12 text-[#ff3831] font-bold block mb-4 tracking-widest uppercase">04 // Operating Principles</span>
+    <h2 id="principles-heading" class="confessions__title">The Lowkey Standard</h2>
+  </div>
+
+  <div class="confessions__deck" id="confessions-deck">
+    {principles.map(p => (
+      <div class={`confession-card --${p.theme}`}>
+        <div>
+          <!-- 5 SVG Stars -->
+          <div class="confession-card__stars" aria-label="5 stars">
+            {Array.from({ length: 5 }).map(() => (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            ))}
+          </div>
+
+          <span class="text-xs font-bold tracking-widest uppercase block mt-6 mb-2 opacity-80">
+            {p.eyebrow}
+          </span>
+          <h3 class="confession-card__quote">{p.quote}</h3>
+          <p class="confession-card__body mt-4">{p.body}</p>
+        </div>
+
+        <div class="confession-card__author border-t border-current/20 pt-4">
+          {p.author}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  // Drag momentum interaction on confessions deck
+  const deck = document.getElementById('confessions-deck');
+  let isDown = false;
+  let startX = 0;
+  let scrollLeft = 0;
+
+  deck?.addEventListener('mousedown', (e) => {
+    isDown = true;
+    startX = e.pageX - deck.offsetLeft;
+    scrollLeft = deck.scrollLeft;
+  });
+
+  deck?.addEventListener('mouseleave', () => { isDown = false; });
+  deck?.addEventListener('mouseup', () => { isDown = false; });
+
+  deck?.addEventListener('mousemove', (e) => {
+    if (!isDown || !deck) return;
+    e.preventDefault();
+    const x = e.pageX - deck.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    deck.scrollLeft = scrollLeft - walk;
+  });
+</script>
+

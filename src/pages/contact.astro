@@ -1,0 +1,181 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ButtonMask from '../components/ui/ButtonMask.astro';
+---
+
+<Layout
+  title="Start a Project — Lowkeydevs"
+  description="Consult with Lowkeydevs on web engineering, creator campaigns, brand systems, or digital growth."
+>
+  <Header />
+
+  <main id="main-content" class="site-max pt-36 pb-24">
+    <div class="max-w-3xl mx-auto">
+      <div class="mb-16 text-center">
+        <span class="text-12 text-[#ff3831] font-bold block mb-4 tracking-widest uppercase">Start an Engagement</span>
+        <h1 class="h1 font-tan mb-6">Let's build something exceptional.</h1>
+        <p class="text-18 text-white/70">
+          Tell us about your brand, your timeline, and the disciplines you need. We review every brief and respond within 24 business hours.
+        </p>
+      </div>
+
+      <!-- Inbound Consultation Form -->
+      <form id="contact-form" class="bg-white/[0.02] border border-white/10 rounded-global p-8 s:p-12 flex flex-col gap-8">
+        <div class="grid grid-cols-1 s:grid-cols-2 gap-6">
+          <div class="flex flex-col gap-2">
+            <label for="name" class="text-12 font-bold uppercase tracking-wider text-white/70">Your Name *</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              placeholder="e.g. Alex Vance"
+              class="w-full bg-white/5 border border-white/10 rounded-md px-4 py-3 text-15 text-[#fffddb] focus:border-[#ff3831] focus:outline-none transition-colors"
+            />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="email" class="text-12 font-bold uppercase tracking-wider text-white/70">Work Email *</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              placeholder="alex@company.com"
+              class="w-full bg-white/5 border border-white/10 rounded-md px-4 py-3 text-15 text-[#fffddb] focus:border-[#ff3831] focus:outline-none transition-colors"
+            />
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label for="company" class="text-12 font-bold uppercase tracking-wider text-white/70">Company / Brand Name</label>
+          <input
+            type="text"
+            id="company"
+            name="company"
+            placeholder="e.g. Acme Corp"
+            class="w-full bg-white/5 border border-white/10 rounded-md px-4 py-3 text-15 text-[#fffddb] focus:border-[#ff3831] focus:outline-none transition-colors"
+          />
+        </div>
+
+        <!-- Discipline Selection Pills -->
+        <div class="flex flex-col gap-3">
+          <span class="text-12 font-bold uppercase tracking-wider text-white/70">Disciplines Needed</span>
+          <div class="flex flex-wrap gap-3">
+            {[
+              'Web Development',
+              'Social & Creator Management',
+              'Creative Production & Brand',
+              'Digital Growth & SEO'
+            ].map(disc => (
+              <label class="cursor-pointer inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-12 text-[#fffddb] has-[:checked]:bg-[#ff3831] has-[:checked]:border-[#ff3831] transition-all">
+                <input type="checkbox" name="services" value={disc} class="sr-only" />
+                <span>{disc}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <!-- Budget Range Selection -->
+        <div class="flex flex-col gap-3">
+          <span class="text-12 font-bold uppercase tracking-wider text-white/70">Estimated Project Budget</span>
+          <div class="flex flex-wrap gap-3">
+            {['$5,000 – $10,000', '$10,000 – $25,000', '$25,000+'].map((b, idx) => (
+              <label class="cursor-pointer inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-12 text-[#fffddb] has-[:checked]:bg-[#fffddb] has-[:checked]:text-[#181616] has-[:checked]:border-[#fffddb] transition-all">
+                <input type="radio" name="budget" value={b} class="sr-only" checked={idx === 1} />
+                <span>{b}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <!-- Brief Details -->
+        <div class="flex flex-col gap-2">
+          <label for="brief" class="text-12 font-bold uppercase tracking-wider text-white/70">Project Brief & Objectives *</label>
+          <textarea
+            id="brief"
+            name="brief"
+            required
+            rows="5"
+            placeholder="Tell us about what you want to build, key goals, target audience, and desired launch timeline..."
+            class="w-full bg-white/5 border border-white/10 rounded-md p-4 text-15 text-[#fffddb] focus:border-[#ff3831] focus:outline-none transition-colors resize-y"
+          ></textarea>
+        </div>
+
+        <!-- Submission Status Message -->
+        <div id="form-feedback" class="hidden p-4 rounded-md text-15 text-center"></div>
+
+        <div class="pt-4 flex justify-between items-center">
+          <span class="text-xs text-white/50">🔒 Your information is confidential.</span>
+          <ButtonMask type="submit" variant="red" id="submit-btn">
+            <span>Send Project Brief →</span>
+          </ButtonMask>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const feedback = document.getElementById('form-feedback');
+  const submitBtn = document.getElementById('submit-btn');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (submitBtn) {
+      submitBtn.setAttribute('disabled', 'true');
+      submitBtn.style.opacity = '0.5';
+    }
+
+    const formData = new FormData(form);
+    const services = formData.getAll('services');
+    const payload = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      company: formData.get('company'),
+      services: services,
+      budget: formData.get('budget'),
+      brief: formData.get('brief')
+    };
+
+    try {
+      const res = await fetch('/api/inquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+
+      if (feedback) {
+        feedback.classList.remove('hidden');
+        if (data.success) {
+          feedback.className = 'p-4 rounded-md text-15 text-center bg-green-900/30 text-green-200 border border-green-500/30';
+          feedback.textContent = data.message;
+          form.reset();
+        } else {
+          feedback.className = 'p-4 rounded-md text-15 text-center bg-red-900/30 text-red-200 border border-red-500/30';
+          feedback.textContent = data.message || 'Error sending inquiry. Please try again.';
+        }
+      }
+    } catch (err) {
+      if (feedback) {
+        feedback.classList.remove('hidden');
+        feedback.className = 'p-4 rounded-md text-15 text-center bg-red-900/30 text-red-200 border border-red-500/30';
+        feedback.textContent = 'Network error. Please try again or email hello@lowkeydevs.com.';
+      }
+    } finally {
+      if (submitBtn) {
+        submitBtn.removeAttribute('disabled');
+        submitBtn.style.opacity = '1';
+      }
+    }
+  });
+</script>
+

@@ -119,14 +119,15 @@ import { meta as extractPdfPagesMeta } from './list/extract-pdf-pages/meta';
 import { meta as pdfFormsMeta } from './list/pdf-forms/meta';
 import { meta as redactPdfMeta } from './list/redact-pdf/meta';
 
-// New tool imports
 import { meta as jwtDebuggerMeta } from './list/jwt-debugger/meta';
 import { meta as sqlFormatterMeta } from './list/sql-formatter/meta';
 import { meta as cronExpressionDescriptorMeta } from './list/cron-expression-descriptor/meta';
 import { meta as usernameAvailabilityCheckerMeta } from './list/username-availability-checker/meta';
+import { meta as instagramSansTextGeneratorMeta } from './list/instagram-sans-text-generator/meta';
 
 // Central Registry of all tools
 export const registry: ToolMeta[] = [
+  instagramSansTextGeneratorMeta,
   wordCounterMeta,
   imageCompressorMeta,
   mergePdfMeta,

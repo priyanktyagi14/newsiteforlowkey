@@ -1,362 +1,60 @@
 ---
-import Icon from './base/Icon.astro';
-import { categories } from '../tools/registry';
-
-// Get the first 5 categories for listing in the footer
-const footerCategories = categories.slice(0, 5);
-
-const popularTools = [
-  { title: 'Merge PDF', slug: 'merge-pdf' },
-  { title: 'JSON Formatter', slug: 'json-formatter' },
-  { title: 'Case Converter', slug: 'case-converter' },
-  { title: 'Password Generator', slug: 'password-generator' },
-  { title: 'Image to Text (OCR)', slug: 'image-to-text-ocr' },
-];
+import PhysicsCanvas from './agency/PhysicsCanvas.astro';
 ---
 
-<footer class="site-footer">
-  <div class="container footer-container">
-    <div class="footer-brand">
-      <a href="/" class="logo" aria-label="Lowkeydevs Homepage">
-        <Icon name="Logo" size={26} class="logo-icon" />
-        <span class="logo-text">Lowkey<span class="logo-accent">devs</span></span>
-      </a>
-      <p class="brand-tagline">
-        The fastest, cleanest collection of 100% private client-side utilities. Zero trackers, zero server logs.
-      </p>
-      <div class="trust-badges">
-        <div class="trust-badge">
-          <Icon name="Shield" size={14} class="badge-icon" />
-          <span>100% Client-Side</span>
-        </div>
-        <div class="trust-badge">
-          <Icon name="Lock" size={14} class="badge-icon" />
-          <span>Zero Server Logs</span>
-        </div>
+<footer class="sf" id="footer" aria-labelledby="footer-manifesto">
+  <!-- Interactive Physics Canvas Floor -->
+  <PhysicsCanvas />
+
+  <!-- Studio Manifesto in Authentic TAN MEMORIES Serif -->
+  <h2 class="sf__manifesto" id="footer-manifesto">
+    Lowkeydevs is a multidisciplinary digital agency at the intersection of software engineering, creative direction, and digital growth, shaping brands that move culture and leave a lasting mark.
+  </h2>
+
+  <!-- Giant Interactive Wordmark Button (Spawns falling chilis on click) -->
+  <button class="sf__wordmark-btn" id="wordmark-btn" type="button" aria-label="Lowkeydevs Interactive Wordmark (Click to spawn chilis)">
+    <svg class="sf__wordmark" viewBox="0 0 1000 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <text
+        x="50%"
+        y="65%"
+        text-anchor="middle"
+        dominant-baseline="central"
+        fill="currentColor"
+        font-family="'sans', 'Helvetica Neue', Arial, sans-serif"
+        font-weight="900"
+        font-size="120"
+        letter-spacing="0.04em"
+      >
+        LOWKEYDEVS
+      </text>
+    </svg>
+  </button>
+
+  <!-- Bottom Meta Information Row -->
+  <div class="site-max">
+    <div class="sf__meta">
+      <div class="sf__meta-text">
+        <p>Partnering with ambitious founders, brands & inspiring creators worldwide.</p>
+        <p class="text-xs text-white/40 mt-1">© 2026 Lowkeydevs Inc. All rights reserved.</p>
       </div>
-    </div>
 
-    <div class="footer-links">
-      <h3 class="footer-heading">Categories</h3>
-      <ul>
-        {footerCategories.map(cat => (
-          <li>
-            <a href={`/tools/category/${cat.slug}`} class="footer-link-item">
-              <Icon name={cat.icon} size={14} class="link-icon" />
-              <span>{cat.title}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-
-    <div class="footer-links">
-      <h3 class="footer-heading">Popular Tools</h3>
-      <ul>
-        {popularTools.map(tool => (
-          <li>
-            <a href={`/tools/${tool.slug}`} class="footer-link-item">
-              <Icon name="Sparkles" size={12} class="link-icon accent-icon" />
-              <span>{tool.title}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-
-    <div class="footer-newsletter">
-      <h3 class="footer-heading">
-        <span class="new-tools-badge">New tools</span>
-        Stay updated
-      </h3>
-      <p class="newsletter-text">Receive updates when new offline tools are added.</p>
-      <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed!');">
-        <input
-          type="email"
-          placeholder="your@email.com"
-          required
-          aria-label="Email address"
-          class="newsletter-input"
-        />
-        <button type="submit" class="newsletter-submit" aria-label="Subscribe">
-          <Icon name="ArrowRight" size={16} />
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    <div class="container footer-bottom-container">
-      <div class="footer-copyright">
-        <p>&copy; {new Date().getFullYear()} Lowkeydevs. All rights reserved.</p>
+      <div class="sf__meta-links">
+        <a href="mailto:hello@lowkeydevs.com" class="sf__meta-link">hello@lowkeydevs.com</a>
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="sf__meta-link">Instagram</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="sf__meta-link">LinkedIn</a>
+        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="sf__meta-link">X (Twitter)</a>
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="sf__meta-link">GitHub</a>
       </div>
-      <div class="footer-bottom-links">
-        <a href="/">Home</a>
-        <span class="sep">•</span>
-        <a href="/about">About us</a>
-        <span class="sep">•</span>
-        <a href="/privacy">Privacy policy</a>
-      </div>
-      <p class="footer-heart">
-        Made with <Icon name="Heart" size={12} class="heart-icon" /> for developers
-      </p>
     </div>
   </div>
 </footer>
 
-<style>
-  .site-footer {
-    background-color: var(--surface);
-    color: var(--text-primary);
-    border-top: 1px solid var(--border);
-    padding: var(--space-16) 0 var(--space-10) 0;
-    margin-top: auto;
-  }
-
-  .footer-container {
-    display: grid;
-    grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr) minmax(0, 1.2fr) minmax(0, 2fr);
-    gap: var(--space-10);
-    margin-bottom: var(--space-12);
-  }
-
-  @media (max-width: 1024px) {
-    .footer-container {
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-10);
+<script>
+  // Wordmark click interactive trigger
+  const wordmarkBtn = document.getElementById('wordmark-btn');
+  wordmarkBtn?.addEventListener('click', () => {
+    if (typeof (window as any).__spawnChilis === 'function') {
+      (window as any).__spawnChilis(12);
     }
-  }
-
-  @media (max-width: 640px) {
-    .footer-container {
-      grid-template-columns: 1fr;
-      gap: var(--space-8);
-    }
-  }
-
-  .footer-brand {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-  }
-
-  .footer-brand .logo {
-    display: inline-flex;
-    width: fit-content;
-  }
-
-  .brand-tagline {
-    color: var(--text-secondary);
-    font-size: var(--fs-sm);
-    line-height: 1.7;
-    max-width: 320px;
-  }
-
-  .trust-badges {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    margin-top: var(--space-2);
-  }
-
-  .trust-badge {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    color: var(--text-secondary);
-    font-size: var(--fs-caption);
-    background-color: var(--surface-elevated);
-    border: 1px solid var(--border);
-    padding: var(--space-1-5) var(--space-3);
-    border-radius: var(--radius-md);
-    width: fit-content;
-  }
-
-  .badge-icon {
-    color: var(--accent);
-  }
-
-  .footer-heading {
-    font-family: var(--font-sans);
-    font-size: var(--fs-caption);
-    font-weight: 600;
-    color: var(--text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: var(--space-5);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    align-items: flex-start;
-  }
-
-  .new-tools-badge {
-    background-color: var(--success-subtle);
-    color: var(--success);
-    font-size: var(--fs-caption);
-    padding: var(--space-0-5) var(--space-2);
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--border);
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-  }
-
-  .footer-links ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-  }
-
-  .footer-link-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    color: var(--text-secondary);
-    font-size: var(--fs-sm);
-    text-decoration: none;
-    transition: all var(--duration-fast) var(--ease-out);
-    font-weight: 400;
-  }
-
-  .footer-link-item .link-icon {
-    color: var(--text-tertiary);
-    transition: color var(--duration-fast) var(--ease-out);
-    flex-shrink: 0;
-  }
-
-  .footer-link-item .link-icon.accent-icon {
-    color: var(--accent-subtle);
-  }
-
-  .footer-link-item:hover {
-    color: var(--accent);
-    transform: translateX(3px);
-  }
-
-  .footer-link-item:hover .link-icon {
-    color: var(--accent);
-  }
-
-  .footer-newsletter {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-    max-width: 360px;
-  }
-
-  .newsletter-text {
-    color: var(--text-secondary);
-    font-size: var(--fs-sm);
-    line-height: 1.6;
-  }
-
-  .newsletter-form {
-    display: flex;
-    position: relative;
-    width: 100%;
-  }
-
-  .newsletter-input {
-    width: 100%;
-    background-color: var(--bg);
-    border: 1px solid var(--border);
-    color: var(--text-primary);
-    border-radius: var(--radius-md);
-    padding: 12px 60px 12px 16px;
-    outline: none;
-    font-family: var(--font-sans);
-    font-size: var(--fs-sm);
-    font-weight: 400;
-    transition: border-color var(--duration-fast) var(--ease-out),
-                box-shadow var(--duration-fast) var(--ease-out);
-    min-height: 52px;
-  }
-
-  .newsletter-input:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px var(--accent-subtle);
-  }
-
-  .newsletter-submit {
-    position: absolute;
-    right: 4px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 44px;
-    height: 44px;
-    background: transparent;
-    border: none;
-    color: var(--text-secondary);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--radius-sm);
-    transition: all var(--duration-fast) var(--ease-out);
-  }
-
-  .newsletter-submit:hover {
-    color: var(--accent);
-    background-color: var(--accent-subtle);
-  }
-
-  .footer-bottom {
-    border-top: 1px solid var(--border);
-    padding-top: var(--space-6);
-    font-size: var(--fs-caption);
-    color: var(--text-tertiary);
-  }
-
-  .footer-bottom-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: var(--space-4);
-  }
-
-  .footer-bottom-links {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-  }
-
-  .footer-bottom-links a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: color var(--duration-fast) var(--ease-out);
-  }
-
-  .footer-bottom-links a:hover {
-    color: var(--accent);
-  }
-
-  .footer-bottom-links .sep {
-    color: var(--border);
-  }
-
-  .footer-heart {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-
-  .heart-icon {
-    color: var(--error);
-  }
-
-  @media (max-width: 768px) {
-    .footer-bottom-container {
-      flex-direction: column;
-      text-align: center;
-      gap: var(--space-4);
-    }
-    
-    .footer-bottom-links {
-      justify-content: center;
-    }
-  }
-</style>
-
+  });
+</script>

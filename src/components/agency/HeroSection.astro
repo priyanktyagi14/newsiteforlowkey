@@ -1,0 +1,52 @@
+---
+import ButtonMask from '../ui/ButtonMask.astro';
+---
+
+<section class="hero" id="hero" aria-labelledby="hero-heading">
+  <!-- Screen-Reader Accessibility Shell -->
+  <div class="sr-only">
+    <h1 id="hero-heading">Lowkeydevs — Multidisciplinary Digital Agency</h1>
+    <p>We build web applications, high-converting digital platforms, creative brand campaigns, and creator growth engines for ambitious businesses.</p>
+  </div>
+
+  <!-- Interactive Kinetic Accent Element -->
+  <div class="hero__rive-wrap" aria-hidden="true">
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="animate-pulse">
+      <circle cx="24" cy="24" r="22" stroke="#FF3831" stroke-width="2" stroke-dasharray="4 4" />
+      <circle cx="24" cy="24" r="10" fill="#FFFEDB" />
+      <circle cx="24" cy="24" r="4" fill="#FF3831" />
+    </svg>
+  </div>
+
+  <!-- Main Headline in Authentic TAN MEMORIES Serif -->
+  <h2 class="hero__tagline">
+    Building digital<br />that hits hard.
+  </h2>
+
+  <!-- Signature Chili Red Swoosh SVG (Exact Reference Vector Path) -->
+  <div class="hero__swoosh-wrap" aria-hidden="true">
+    <svg class="hero__swoosh" viewBox="0 0 58 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M57.2483 9.81282L54.8383 6.92282C54.2183 6.17282 52.6383 5.41282 51.9383 4.90282C51.8783 4.86282 51.6383 4.90282 51.4583 4.69282C51.3483 4.69282 51.2383 4.67282 51.1283 4.66282C49.5583 4.47282 47.7883 4.15282 46.2283 4.32282C42.9583 4.70282 39.9383 6.34282 37.4283 8.41282C37.3583 9.01282 39.7083 9.19282 40.0183 9.31282C42.3283 10.2428 43.1683 10.4628 44.8383 12.2828C46.0483 11.6428 47.1483 10.8228 48.4383 10.3328C49.4183 9.96282 51.5583 9.56282 52.6083 9.52282C53.4883 9.48282 55.3583 9.98282 56.1583 9.94282C56.4383 9.93282 56.5283 9.88282 56.7583 9.73282C56.3283 9.41282 57.4483 10.0428 57.2483 9.80282L57.2483 9.81282Z" fill="#FF3831" />
+      <path d="M28.1682 5.78286C28.8082 5.83286 28.6782 5.56286 28.5382 5.09286C27.9182 3.02286 26.2082 1.48286 24.5082 0.302856C24.4082 0.272856 24.2882 0.262856 24.1782 0.242856C16.2182 -1.47714 12.6182 7.47286 3.37816 6.79286C2.20816 6.70286 1.58816 6.23286 0.638164 6.08286C0.518164 6.06286 0.268164 6.13286 0.118164 6.15286C0.358164 6.49286 0.348164 6.97286 0.648164 7.27286C2.44816 9.12286 5.54816 10.8529 8.01816 11.6229C8.11816 11.6529 8.23816 11.6529 8.34816 11.6829C8.46816 11.7129 8.73816 11.5829 8.86816 11.6129C8.90816 11.6129 8.98816 11.8529 9.14816 11.8829C9.72816 12.0129 10.3782 12.0029 10.9482 12.1929C11.0182 12.1929 11.0682 12.0729 11.1482 12.0629C16.2282 11.2729 23.0182 4.49286 27.5082 5.65286C27.6982 5.70286 28.1282 5.76286 28.1582 5.78286L28.1682 5.78286Z" fill="#FF3831" />
+      <path d="M39.2983 11.5028C38.9983 11.3728 38.8183 11.5728 38.6383 11.5828C38.5283 11.5828 38.4183 11.6028 38.3083 11.6228C37.5483 11.7328 36.7383 12.0128 35.9983 11.9028L35.8583 12.0928C35.1983 12.0328 33.4683 11.8328 32.9483 11.6128C30.8883 10.7328 28.7383 8.75285 26.3383 8.23285C26.2383 8.35285 26.1483 8.51285 26.0483 8.60285C25.9183 8.53285 25.8083 8.40285 25.6783 8.31285L24.2383 9.40285L24.3483 9.89285C27.0483 12.7228 27.5183 15.2128 31.5283 16.4728C31.5983 16.4929 31.6483 16.6028 31.7183 16.6128L32.8983 16.6328C33.2683 16.5328 33.6683 16.4628 34.0383 16.3228C34.1283 16.2928 34.2783 16.3228 34.3683 16.2828C34.4683 16.2428 34.6283 16.2828 34.6983 16.2428C35.9883 15.6228 38.2483 13.6028 38.7283 12.2328C38.8283 12.1428 38.9283 11.9828 39.0183 11.8628C39.2883 11.9028 39.3383 11.8928 39.4883 11.6328C39.4183 11.5928 39.3683 11.5228 39.2983 11.4928L39.2983 11.5028Z" fill="#FF3831" />
+    </svg>
+  </div>
+
+  <!-- Editorial Subtitle -->
+  <p class="hero__subtitle">
+    A multidisciplinary digital agency at the crossroad of software engineering, brand identity, and creator-led distribution.
+  </p>
+
+  <!-- Interactive Dual Actions -->
+  <div class="hero__actions">
+    <ButtonMask href="#work" variant="cream">
+      <span>View Selected Work</span>
+      <span class="btn-mask__icon">↓</span>
+    </ButtonMask>
+    <ButtonMask href="/services" variant="outline">
+      <span>Our Services</span>
+      <span class="btn-mask__icon">→</span>
+    </ButtonMask>
+  </div>
+</section>
+

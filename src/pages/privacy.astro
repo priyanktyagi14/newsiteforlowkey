@@ -2,177 +2,48 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import Icon from '../components/base/Icon.astro';
 ---
 
 <Layout
-  title="Privacy policy - Lowkeydevs"
-  description="Read our plain-English Privacy Policy: why you can trust Lowkeydevs to process your developer data client-side with absolute security."
+  title="Privacy Policy — Lowkeydevs"
+  description="Read the Lowkeydevs Studio privacy commitment: how we handle client data, communications, and analytics."
 >
   <Header />
 
-  <main id="main-content" class="privacy-main container container-narrow">
-    <article class="privacy-content">
-      <header class="privacy-header">
-        <div class="lock-icon-title">
-          <div class="lock-wrapper">
-            <Icon name="Lock" size={20} />
-          </div>
-          <h1 class="privacy-title">Privacy policy</h1>
-        </div>
-        <p class="privacy-date">Last updated: July 4, 2026</p>
-      </header>
+  <main id="main-content" class="site-max pt-36 pb-24 max-w-4xl mx-auto">
+    <div class="mb-12">
+      <span class="text-12 text-[#ff3831] font-bold block mb-4 tracking-widest uppercase">Legal</span>
+      <h1 class="h2 font-tan mb-4">Privacy Policy</h1>
+      <p class="text-sm text-white/50">Last updated: November 2026</p>
+    </div>
 
-      <section class="privacy-body">
-        <h2>Plain English summary</h2>
-        <div class="highlight-text">
-          <p>
-            <strong>Your data is yours alone.</strong> We do not collect, send, save, or store any of the input values, files, text, keys, or passwords you process on our website. All processing happens entirely inside your browser via JavaScript.
-          </p>
-        </div>
-
-        <h2>1. Personal data collection</h2>
-        <p>
-          We do not require you to create an account, register, or log in to use Lowkeydevs. We do not collect personal identifiers such as your name, email address, IP address, or physical location.
-        </p>
-
-        <h2>2. Data processing (client-side only)</h2>
-        <p>
-          All operations (such as formatting JSON, generating passwords, or encoding/decoding Base64) are performed locally inside your browser's sandboxed environment. Your input strings and resulting output values are never transmitted to our servers or any third parties.
-        </p>
-
-        <h2>3. Cookies and localStorage</h2>
-        <p>
-          We do not use tracking cookies or advertising pixels. We use standard browser <code>localStorage</code> solely to save your design preference (light mode vs. dark mode) so that it persists when you return to the site. This preference data is saved locally on your device and is never sent to us.
-        </p>
-
-        <h2>4. Third-party analytics</h2>
-        <p>
-          To understand basic usage (such as total pageviews and common browser agents), we may use privacy-friendly, lightweight web analytics. These analytics do not use cookies, do not track you across sites, and comply fully with GDPR, CCPA, and PECR standards.
-        </p>
-
-        <h2>5. Changes to this policy</h2>
-        <p>
-          If we add tools that require server-side computing, we will explicitly mark those tools and update this policy to reflect what data is processed. For now, every tool on Lowkeydevs is 100% client-side.
-        </p>
+    <div class="prose prose-invert flex flex-col gap-8 text-15 text-white/80 leading-relaxed border-t border-white/10 pt-8">
+      <section>
+        <h2 class="text-20 font-bold text-[#fffddb] mb-3">1. Overview</h2>
+        <p>Lowkeydevs ("we", "our", "us") values client and visitor privacy. This policy outlines how we handle information submitted through our agency consultation portal and browsing telemetry.</p>
       </section>
 
-      <div class="privacy-footer">
-        <a href="/" class="btn btn-primary">Return to homepage</a>
-      </div>
-    </article>
+      <section>
+        <h2 class="text-20 font-bold text-[#fffddb] mb-3">2. Inbound Briefs and Contact Inquiries</h2>
+        <p>When you submit a project brief or consultation request via our contact form, we collect your name, work email, company name, and project specifications. This data is strictly used to communicate with you regarding your engagement and is never sold or shared with external third-party advertisers.</p>
+      </section>
+
+      <section>
+        <h2 class="text-20 font-bold text-[#fffddb] mb-3">3. Telemetry and Analytics</h2>
+        <p>We use Google Analytics 4 (GA4) with IP anonymization to monitor site traffic volume, page load performance, and user engagement trends. No personally identifiable information is stored in analytics logs.</p>
+      </section>
+
+      <section>
+        <h2 class="text-20 font-bold text-[#fffddb] mb-3">4. Security</h2>
+        <p>Inbound consultation inquiries are secured in our PostgreSQL database protected by Row Level Security (RLS) policies and industry-standard encryption in transit and at rest.</p>
+      </section>
+
+      <section>
+        <h2 class="text-20 font-bold text-[#fffddb] mb-3">5. Contact</h2>
+        <p>For inquiries regarding privacy or to request the deletion of your consultation data, contact <a href="mailto:hello@lowkeydevs.com" class="text-[#ff3831] underline">hello@lowkeydevs.com</a>.</p>
+      </section>
+    </div>
   </main>
 
   <Footer />
 </Layout>
-
-<style>
-  .privacy-main {
-    padding-top: clamp(32px, 8vw, 64px);
-    padding-bottom: clamp(40px, 10vw, 80px);
-    flex: 1;
-    display: flex;
-    justify-content: center;
-  }
-
-  .privacy-content {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: clamp(20px, 5vw, 40px);
-  }
-
-  .privacy-header {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-    border-bottom: 1px solid var(--border);
-    padding-bottom: clamp(16px, 4vw, 32px);
-  }
-
-  .lock-icon-title {
-    display: flex;
-    align-items: center;
-    gap: var(--space-4);
-  }
-
-  .lock-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    background-color: var(--success-subtle);
-    color: var(--success);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-  }
-
-  .privacy-title {
-    font-family: var(--font-heading);
-    font-size: var(--fs-h1);
-    font-weight: 500;
-    line-height: var(--lh-h1);
-    letter-spacing: var(--ls-h1);
-    color: var(--text-primary);
-  }
-
-  .privacy-date {
-    color: var(--text-tertiary);
-    font-size: var(--fs-caption);
-    font-weight: 500;
-    line-height: var(--lh-sm);
-  }
-
-  .privacy-body {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(16px, 3vw, 24px);
-    line-height: var(--lh-body);
-  }
-
-  .privacy-body h2 {
-    font-family: var(--font-heading);
-    font-size: var(--fs-h2);
-    font-weight: 500;
-    line-height: var(--lh-h2);
-    letter-spacing: var(--ls-h2);
-    color: var(--text-primary);
-    margin-top: var(--space-2);
-  }
-
-  .privacy-body p {
-    color: var(--text-secondary);
-    font-size: var(--fs-body);
-    line-height: var(--lh-body);
-    letter-spacing: var(--ls-body);
-  }
-
-  .privacy-body code {
-    background-color: var(--code-bg);
-    padding: 2px 6px;
-    border-radius: var(--radius-sm);
-    font-size: 0.875em;
-  }
-
-  .highlight-text {
-    background-color: var(--success-subtle);
-    border: 1px solid var(--border);
-    padding: clamp(16px, 4vw, 24px);
-    border-radius: var(--radius-lg);
-  }
-
-  .highlight-text p {
-    color: var(--success);
-    font-size: var(--fs-body);
-    line-height: var(--lh-body);
-    letter-spacing: var(--ls-body);
-  }
-
-  .privacy-footer {
-    border-top: 1px solid var(--border);
-    padding-top: clamp(16px, 4vw, 32px);
-    text-align: center;
-  }
-</style>
-

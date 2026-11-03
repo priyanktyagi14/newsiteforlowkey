@@ -1,0 +1,148 @@
+---
+export interface ProjectItem {
+  id: string;
+  title: string;
+  category: string;
+  tags: string;
+  aspectClass: 'aspect-small' | 'aspect-medium' | 'aspect-large';
+  mediaType: 'video' | 'image';
+  mediaSrc: string;
+  posterSrc?: string;
+  challenge: string;
+  solution: string;
+  deliverables: string[];
+  techStack: string[];
+}
+
+export const projects: ProjectItem[] = [
+  {
+    id: 'cloudflare-web-engine',
+    title: 'Cloudflare-Native Web Engine',
+    category: 'Web Development & Cloud',
+    tags: 'Astro, Edge SSR, Cloudflare Workers, TypeScript',
+    aspectClass: 'aspect-small',
+    mediaType: 'video',
+    mediaSrc: 'https://stream.mux.com/IylgySf00i66sc7Uv687yfc2NTAuD8pt00/high.mp4',
+    challenge: 'High-traffic consumer applications require instant edge execution without cold starts or server memory overhead.',
+    solution: 'Engineered an edge-first Astro SSR architecture deployed globally across Cloudflare Points of Presence, achieving sub-50ms TTFB worldwide.',
+    deliverables: ['Custom Astro 5 Edge Architecture', 'Zero-Bundle JavaScript Hydration', 'Global Edge Caching Strategy', 'Sub-50ms Global Latency SLA'],
+    techStack: ['Astro', 'Cloudflare Workers', 'TypeScript', 'Tailwind CSS']
+  },
+  {
+    id: 'creator-discovery-hub',
+    title: 'Creator Discovery & Distribution Hub',
+    category: 'Social Media & Creators',
+    tags: 'Talent Operations, Influencer Discovery, Campaigns',
+    aspectClass: 'aspect-medium',
+    mediaType: 'video',
+    mediaSrc: 'https://stream.mux.com/xeJ4rATXERHuSR3N8xt01M6CPOabHYOdc/high.mp4',
+    challenge: 'Brands struggle to identify high-affinity niche creators and coordinate high-volume multi-platform short-form campaigns.',
+    solution: 'Designed and executed an end-to-end talent acquisition and campaign operations workflow spanning creator scouting, contracts, and tracking.',
+    deliverables: ['Creator Discovery Framework', 'Campaign Logistics & Contract Management', 'Content Performance Analytics', 'Multi-Platform Asset Distribution'],
+    techStack: ['Meta Creator Studio', 'TikTok Ads Manager', 'Figma', 'Custom CRM Pipeline']
+  },
+  {
+    id: 'kinetic-brand-identity',
+    title: 'Kinetic Brand Identity System',
+    category: 'Creative Production & Branding',
+    tags: 'Brand Strategy, Design System, Motion Assets',
+    aspectClass: 'aspect-large',
+    mediaType: 'image',
+    mediaSrc: 'https://www.datocms-assets.com/160733/1761856774-group-22-copy-2.jpg?auto=format&fit=max&h=2440&q=85&w=2440',
+    challenge: 'Digital-first challenger brands get lost in sea-of-sameness minimalism without kinetic identity guidelines.',
+    solution: 'Formulated a tactile, high-contrast visual identity combining editorial serif typography, custom micro-interactions, and motion design tokens.',
+    deliverables: ['Complete Brand Guidelines & Voice Codex', 'Kinetic Design System & Tokens', 'Custom Typography & Monogram Mark', 'Interactive Web Prototyping'],
+    techStack: ['Figma', 'After Effects', 'Design Systems', 'CSS @property Tokens']
+  },
+  {
+    id: 'commercial-video-production',
+    title: 'High-Retention Video Production',
+    category: 'Creative Production',
+    tags: 'Short-Form Reels, Commercial Editing, VFX',
+    aspectClass: 'aspect-large',
+    mediaType: 'image',
+    mediaSrc: 'https://www.datocms-assets.com/160733/1761249300-frame-4239.png?auto=format&fit=max&h=2440&q=85&w=2440',
+    challenge: 'Audience retention drops sharply in the first 3 seconds of social content without narrative pacing and rhythmic sound design.',
+    solution: 'Produced a series of high-cadence commercial video assets and daily vertical shorts engineered specifically for TikTok and Instagram algorithms.',
+    deliverables: ['Hook & Narrative Pacing Scripts', '4K Commercial Post-Production & Color Grading', 'Motion Graphics & Subtitle Kinetic Treatments', 'Algorithmic Distribution Plan'],
+    techStack: ['Adobe Premiere Pro', 'After Effects', 'DaVinci Resolve', 'Sound Design']
+  },
+  {
+    id: 'headless-ecommerce-platform',
+    title: 'Headless E-Commerce Platform',
+    category: 'Web Development',
+    tags: 'Shopify Storefront, Stripe Checkout, APIs',
+    aspectClass: 'aspect-medium',
+    mediaType: 'image',
+    mediaSrc: 'https://www.datocms-assets.com/160733/1762195748-suzy.jpg?auto=format&fit=max&h=2440&q=85&w=2440',
+    challenge: 'Monolithic template-based stores suffer from poor checkout conversion and sluggish international page load times.',
+    solution: 'Architected a decoupled headless storefront integrating Shopify Storefront GraphQL APIs with a bespoke Astro frontend and instant checkout.',
+    deliverables: ['Custom Headless Architecture', 'Sub-Second Product Filtering & Search', 'Automated Inventory & ERP Synchronization', 'Stripe Multi-Currency Gateway'],
+    techStack: ['Shopify Storefront API', 'Astro', 'Stripe', 'GraphQL']
+  },
+  {
+    id: 'technical-seo-pipeline',
+    title: 'Technical SEO & Lead Pipeline',
+    category: 'Digital Growth',
+    tags: 'Search Authority, Conversion Funnels, Digitization',
+    aspectClass: 'aspect-small',
+    mediaType: 'video',
+    mediaSrc: 'https://stream.mux.com/cBsxF00II8c87392r4R4Df9jy68zah7Dj/high.mp4',
+    challenge: 'B2B service providers and tech companies often experience high bounce rates and low organic search discovery.',
+    solution: 'Audited and re-indexed technical site structure, implementing schema markup, semantic content clusters, and high-converting inbound capture forms.',
+    deliverables: ['Technical SEO Architecture & Schema', 'Core Web Vitals Perfection Audit', 'High-Converting Inbound Landing Funnels', 'Automated Lead Qualification Pipeline'],
+    techStack: ['Google Search Console', 'Ahrefs', 'Supabase CRM', 'GA4']
+  }
+];
+---
+
+<section class="work site-max" id="work" aria-labelledby="work-heading">
+  <div class="work__header">
+    <span class="text-12 text-[#ff3831] font-bold block mb-4 tracking-widest uppercase">01 // Portfolio</span>
+    <h2 id="work-heading" class="h1 font-tan">Selected Work</h2>
+  </div>
+
+  <div class="work__grid">
+    {projects.map((project, index) => (
+      <article
+        class={`case-item ${project.aspectClass}`}
+        data-project-id={project.id}
+        tabindex="0"
+        role="button"
+        aria-label={`View case study for ${project.title}`}
+      >
+        <div class="case-item__thumbnail radius-fix">
+          {project.mediaType === 'video' ? (
+            <video
+              src={project.mediaSrc}
+              class="case-item__media"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+            />
+          ) : (
+            <img
+              src={project.mediaSrc}
+              alt={project.title}
+              class="case-item__media"
+              loading="lazy"
+            />
+          )}
+        </div>
+
+        <div class="case-item__meta">
+          <h3 class="case-item__title">{project.title}</h3>
+          <span class="case-item__tags">{project.tags}</span>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<!-- Pass project data safely to client for the interactive drawer -->
+<script define:vars={{ projects }}>
+  window.__LOWKEY_PROJECTS = projects;
+</script>
+
