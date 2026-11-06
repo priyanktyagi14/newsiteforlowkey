@@ -81,6 +81,11 @@ const servicePillars = [
     </svg>
   </div>
 
+  <!-- Mobile Swipe Indicator Hint -->
+  <div class="wins__hint" aria-hidden="true">
+    <span>← Swipe to explore disciplines →</span>
+  </div>
+
   <!-- Horizontal Slider Track -->
   <div class="wins__track" id="wins-track">
     {servicePillars.map(p => (
@@ -135,4 +140,3 @@ const servicePillars = [
     track.scrollLeft = scrollLeft - walk;
   });
 </script>
-

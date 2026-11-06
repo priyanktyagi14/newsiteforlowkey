@@ -96,6 +96,33 @@
       }
     });
 
+    // Mobile touch physics interactions
+    canvas.addEventListener('touchstart', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      if (touch) {
+        const clickX = touch.clientX - rect.left;
+        const clickY = touch.clientY - rect.top;
+        for (let i = 0; i < 4; i++) {
+          spawnParticle(clickX + (Math.random() - 0.5) * 40, clickY - 20, -Math.random() * 5 - 2);
+        }
+      }
+    }, { passive: true });
+
+    canvas.addEventListener('touchmove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      if (touch) {
+        mouseX = touch.clientX - rect.left;
+        mouseY = touch.clientY - rect.top;
+      }
+    }, { passive: true });
+
+    canvas.addEventListener('touchend', () => {
+      mouseX = -1000;
+      mouseY = -1000;
+    }, { passive: true });
+
     // Animation Loop
     let lastTime = performance.now();
     const tick = () => {

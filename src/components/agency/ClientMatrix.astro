@@ -22,10 +22,12 @@ const platforms = [
   <div class="clients__matrix">
     {platforms.map(p => (
       <div class="client-cell">
-        <span class="client-cell__name">{p.name}</span>
+        <div class="client-cell__header">
+          <span class="client-cell__dot" aria-hidden="true"></span>
+          <span class="client-cell__name">{p.name}</span>
+        </div>
         <span class="client-cell__role">{p.role}</span>
       </div>
     ))}
   </div>
 </section>
-

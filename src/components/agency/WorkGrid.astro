@@ -130,9 +130,13 @@ export const projects: ProjectItem[] = [
               loading="lazy"
             />
           )}
+          <div class="case-item__pill-wrap" aria-hidden="true">
+            <span class="case-item__view-pill">Explore Dossier ↗</span>
+          </div>
         </div>
 
         <div class="case-item__meta">
+          <span class="case-item__category">{project.category}</span>
           <h3 class="case-item__title">{project.title}</h3>
           <span class="case-item__tags">{project.tags}</span>
         </div>

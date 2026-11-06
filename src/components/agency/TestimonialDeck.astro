@@ -41,6 +41,11 @@ const principles = [
     <h2 id="principles-heading" class="confessions__title">The Lowkey Standard</h2>
   </div>
 
+  <!-- Mobile Swipe Hint -->
+  <div class="confessions__hint" aria-hidden="true">
+    <span>← Swipe to read operating rules →</span>
+  </div>
+
   <div class="confessions__deck" id="confessions-deck">
     {principles.map(p => (
       <div class={`confession-card --${p.theme}`}>
@@ -93,4 +98,3 @@ const principles = [
     deck.scrollLeft = scrollLeft - walk;
   });
 </script>
-
