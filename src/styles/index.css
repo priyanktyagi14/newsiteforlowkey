@@ -614,39 +614,20 @@ h3.font-tan,
   }
 }
 
-/* Mobile Quick CTA Pill */
-.sh__mobile-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.75rem 1.4rem;
-  border-radius: 9999px;
-  background: linear-gradient(135deg, #8C52FF 0%, #6830d6 100%);
-  color: #ffffff;
-  font-family: var(--font-sans);
-  font-size: 1.25rem;
-  font-weight: 600;
-  text-decoration: none;
-  box-shadow: 0 2px 14px rgba(140, 82, 255, 0.4);
-  transition: transform 0.2s ease, opacity 0.2s ease;
+/* Desktop CTA button container inside header */
+.sh__desktop-cta-wrap {
+  display: none !important;
 }
 
-.sh__mobile-cta:active {
-  transform: scale(0.95);
-}
-
-.sh__mobile-cta-arrow {
-  font-size: 1.1rem;
-  transition: transform 0.2s ease;
-}
-
-.sh__mobile-cta:active .sh__mobile-cta-arrow {
-  transform: translateX(2px);
+@media (min-width: 768px) {
+  .sh__desktop-cta-wrap {
+    display: block !important;
+  }
 }
 
 /* Mobile Menu Button */
 .mobile-toggle {
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -678,38 +659,60 @@ h3.font-tan,
 }
 
 @media (min-width: 768px) {
-  .mobile-toggle,
-  .sh__mobile-cta {
+  .mobile-toggle {
     display: none !important;
   }
 }
 
-/* Scrolled Sticky Dropdown Navigation Capsule (Desktop) */
-.sh__nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: var(--color-bg-base);
-  border-bottom-right-radius: 0.625rem;
-  padding: 0 3rem 2.5rem 5.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  z-index: 101;
-  transform: translateY(-100%);
-  transition: transform 0.6s var(--ease-expo), padding-top 0.5s var(--ease-expo);
-  border-right: 1px solid var(--color-border-subtle);
-  border-bottom: 1px solid var(--color-border-subtle);
+/* ============================================================
+   STICKY NAV CAPSULE (.sh__nav)
+   CRITICAL ARCHITECTURAL RULE:
+   - On Mobile (<768px): MUST NEVER EXIST.
+     No drop capsule, no persistent text menu blocking screen.
+   - On Desktop (>=768px): Smooth slide-down capsule on scroll.
+   ============================================================ */
+.sh__nav,
+.is-scrolled .sh__nav,
+header.is-scrolled .sh__nav,
+#sticky-nav {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateY(-150%) !important;
 }
 
-.is-scrolled .sh__nav {
-  transform: translateY(0);
-  padding-top: 11.5rem;
-}
+@media (min-width: 768px) {
+  .sh__nav,
+  #sticky-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--color-bg-base);
+    border-bottom-right-radius: 0.625rem;
+    padding: 0 3rem 2.5rem 5.5rem;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    flex-direction: column;
+    gap: 1.5rem;
+    z-index: 101;
+    transform: translateY(-100%) !important;
+    transition: transform 0.6s var(--ease-expo), padding-top 0.5s var(--ease-expo);
+    border-right: 1px solid var(--color-border-subtle);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
 
-@media (max-width: 767px) {
-  .sh__nav {
-    display: none;
+  .is-scrolled .sh__nav,
+  header.is-scrolled .sh__nav,
+  header.is-scrolled #sticky-nav {
+    transform: translateY(0) !important;
+    padding-top: 11.5rem;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
   }
 }
 
@@ -770,21 +773,31 @@ h3.font-tan,
 .mm {
   position: fixed;
   inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
   background: radial-gradient(circle at top right, rgba(140, 82, 255, 0.22) 0%, rgba(9, 9, 11, 0.98) 60%);
+  background-color: #09090b;
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
-  z-index: 200;
-  padding: 2.2rem 2.2rem 3rem;
+  z-index: 999;
+  padding: 2.2rem 2.2rem 3.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   overflow-y: auto;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
   transform: translateY(-100%);
-  transition: transform 0.55s var(--ease-expo);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.45s;
 }
 
 .mm.is-open {
-  transform: translateY(0);
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: translateY(0) !important;
 }
 
 .mm__top {
@@ -800,6 +813,24 @@ h3.font-tan,
   align-items: center;
   gap: 1.2rem;
   text-decoration: none;
+}
+
+.mm__box-icon {
+  width: 3.8rem;
+  height: 3.8rem;
+  border-radius: 0.75rem;
+}
+
+.mm__brand-text {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.025em;
+}
+
+.mm__brand-text span {
+  color: var(--color-accent-purple);
 }
 
 .mm__close {
@@ -830,7 +861,7 @@ h3.font-tan,
 
 .mm__item {
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  padding-bottom: 1.2rem;
+  padding-bottom: 1.4rem;
 }
 
 .mm__link {
@@ -838,7 +869,7 @@ h3.font-tan,
   align-items: center;
   justify-content: space-between;
   font-family: var(--font-display);
-  font-size: 2.5rem;
+  font-size: 2.6rem;
   font-weight: 700;
   color: #ffffff;
   text-decoration: none;
@@ -1074,28 +1105,28 @@ h3.font-tan,
 .hero__rotator {
   display: inline-block;
   position: relative;
-  background: linear-gradient(135deg, #c4a9f3 0%, #8C52FF 50%, #a875ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   vertical-align: top;
   text-align: left;
-  white-space: nowrap;
 }
 
 .hero__rotator-word {
   display: inline-block;
+  background: linear-gradient(135deg, #c4a9f3 0%, #8C52FF 50%, #a875ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--color-accent-purple);
   transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
 }
 
 .hero__rotator-word:not(.is-active) {
-  display: none;
+  display: none !important;
   opacity: 0;
   transform: translateY(16px);
 }
 
 .hero__rotator-word.is-active {
-  display: inline-block;
+  display: inline-block !important;
   opacity: 1;
   transform: translateY(0);
   animation: word-rise-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;

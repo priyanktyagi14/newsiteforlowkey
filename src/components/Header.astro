@@ -43,92 +43,96 @@ import ButtonMask from './ui/ButtonMask.astro';
 
   <!-- Pinned Top-Right Action -->
   <div class="sh-right">
-    <ButtonMask href="/contact" variant="cream" class="hidden md:inline-flex">
-      <span>Start a Project</span>
-      <span class="btn-mask__icon">→</span>
-    </ButtonMask>
+    <!-- Desktop-only CTA Button -->
+    <div class="sh__desktop-cta-wrap">
+      <ButtonMask href="/contact" variant="cream">
+        <span>Start a Project</span>
+        <span class="btn-mask__icon">→</span>
+      </ButtonMask>
+    </div>
 
-    <!-- Mobile Quick CTA -->
-    <a href="/contact" class="sh__mobile-cta md:hidden" aria-label="Start a project">
-      <span>Start</span>
-      <span class="sh__mobile-cta-arrow">→</span>
-    </a>
-
-    <!-- Mobile Menu Button -->
+    <!-- Mobile-only Hamburger Menu Toggle Button -->
     <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu" type="button">
       <span class="mobile-toggle__line mobile-toggle__line--top"></span>
       <span class="mobile-toggle__line mobile-toggle__line--bot"></span>
     </button>
   </div>
+</header>
 
-  <!-- Fullscreen Mobile Navigation Drawer -->
-  <div class="mm" id="mobile-menu" aria-hidden="true">
-    <div class="mm__top">
-      <a href="/" class="mm__brand">
-        <div class="sh__box-icon w-8 h-8">
-          <svg width="18" height="18" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill="#FFFFFF" d="M0 0 L80 0 L100 75 L120 150 L200 150 L180 75 L100 75 L20 75 Z" />
-          </svg>
-        </div>
-        <span class="font-display text-2xl text-white font-bold tracking-tight">Lowkey<span class="text-[#8C52FF]">devs</span></span>
-      </a>
-      <button class="mm__close" id="mobile-close" aria-label="Close menu" type="button">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
+<!-- Fullscreen Mobile Navigation Drawer (Independent from Header to prevent backdrop-filter clipping) -->
+<div class="mm" id="mobile-menu" aria-hidden="true">
+  <div class="mm__top">
+    <a href="/" class="mm__brand">
+      <div class="sh__box-icon mm__box-icon">
+        <svg width="20" height="20" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#FFFFFF" d="M0 0 L80 0 L100 75 L120 150 L200 150 L180 75 L100 75 L20 75 Z" />
         </svg>
-      </button>
+      </div>
+      <span class="mm__brand-text">Lowkey<span>devs</span></span>
+    </a>
+    <button class="mm__close" id="mobile-close" aria-label="Close menu" type="button">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <nav class="mm__nav">
+    <div class="mm__item">
+      <a href="#work" class="mm__link">
+        <span>Selected Work</span>
+        <span class="mm__link-tag">01</span>
+      </a>
     </div>
 
-    <nav class="mm__nav">
-      <div class="mm__item">
-        <a href="#work" class="mm__link">
-          <span>Selected Work</span>
-          <span class="mm__link-tag">01</span>
-        </a>
-      </div>
-
-      <div class="mm__item">
-        <a href="/services" class="mm__link">
-          <span>Services</span>
-          <span class="mm__link-tag">02</span>
-        </a>
-        <div class="mm__sublinks">
-          <a href="/services/web-development" class="mm__sublink">Web Development</a>
-          <a href="/services/social-creator" class="mm__sublink">Creator Operations</a>
-          <a href="/services/creative-production" class="mm__sublink">Creative & Brand</a>
-          <a href="/services/digital-growth" class="mm__sublink">Digital Growth</a>
-        </div>
-      </div>
-
-      <div class="mm__item">
-        <a href="/agency" class="mm__link">
-          <span>Agency</span>
-          <span class="mm__link-tag">03</span>
-        </a>
-      </div>
-
-      <div class="mm__item">
-        <a href="/agency#process" class="mm__link">
-          <span>Process</span>
-          <span class="mm__link-tag">04</span>
-        </a>
-      </div>
-    </nav>
-
-    <div class="mm__bottom">
-      <a href="/contact" class="mm__cta-btn">
-        <span>Start a Project</span>
-        <span class="mm__cta-arrow">→</span>
+    <div class="mm__item">
+      <a href="/services" class="mm__link">
+        <span>Services</span>
+        <span class="mm__link-tag">02</span>
       </a>
-
-      <div class="mm__inquiries">
-        <span class="mm__inquiries-label">Direct Inquiries</span>
-        <a href="mailto:hello@lowkeydevs.com" class="mm__inquiries-link">hello@lowkeydevs.com</a>
+      <div class="mm__sublinks">
+        <a href="/services/web-development" class="mm__sublink">Web Development</a>
+        <a href="/services/social-creator" class="mm__sublink">Creator Operations</a>
+        <a href="/services/creative-production" class="mm__sublink">Creative & Brand</a>
+        <a href="/services/digital-growth" class="mm__sublink">Digital Growth</a>
       </div>
+    </div>
+
+    <div class="mm__item">
+      <a href="/agency" class="mm__link">
+        <span>Agency</span>
+        <span class="mm__link-tag">03</span>
+      </a>
+    </div>
+
+    <div class="mm__item">
+      <a href="/agency#process" class="mm__link">
+        <span>Process</span>
+        <span class="mm__link-tag">04</span>
+      </a>
+    </div>
+
+    <div class="mm__item">
+      <a href="/contact" class="mm__link">
+        <span>Contact</span>
+        <span class="mm__link-tag">05</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="mm__bottom">
+    <a href="/contact" class="mm__cta-btn">
+      <span>Start a Project</span>
+      <span class="mm__cta-arrow">→</span>
+    </a>
+
+    <div class="mm__inquiries">
+      <span class="mm__inquiries-label">Direct Inquiries</span>
+      <a href="mailto:hello@lowkeydevs.com" class="mm__inquiries-link">hello@lowkeydevs.com</a>
     </div>
   </div>
-</header>
+</div>
 
 <script>
   // Handle Sticky Nav Scroll State
