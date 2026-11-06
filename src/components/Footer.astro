@@ -11,8 +11,8 @@ import PhysicsCanvas from './agency/PhysicsCanvas.astro';
     Lowkeydevs is a multidisciplinary digital agency at the intersection of software engineering, creative direction, and digital growth, shaping brands that move culture and leave a lasting mark.
   </h2>
 
-  <!-- Giant Interactive Wordmark Button (Spawns falling chilis on click) -->
-  <button class="sf__wordmark-btn" id="wordmark-btn" type="button" aria-label="Lowkeydevs Interactive Wordmark (Click to spawn chilis)">
+  <!-- Giant Interactive Wordmark Button (Spawns falling tokens on click) -->
+  <button class="sf__wordmark-btn" id="wordmark-btn" type="button" aria-label="Lowkeydevs Interactive Wordmark (Click to spawn tokens)">
     <svg class="sf__wordmark" viewBox="0 0 1000 180" fill="none" xmlns="http://www.w3.org/2000/svg">
       <text
         x="50%"
@@ -20,8 +20,8 @@ import PhysicsCanvas from './agency/PhysicsCanvas.astro';
         text-anchor="middle"
         dominant-baseline="central"
         fill="currentColor"
-        font-family="'sans', 'Helvetica Neue', Arial, sans-serif"
-        font-weight="900"
+        font-family="'Poppins', system-ui, sans-serif"
+        font-weight="800"
         font-size="120"
         letter-spacing="0.04em"
       >
@@ -53,8 +53,10 @@ import PhysicsCanvas from './agency/PhysicsCanvas.astro';
   // Wordmark click interactive trigger
   const wordmarkBtn = document.getElementById('wordmark-btn');
   wordmarkBtn?.addEventListener('click', () => {
-    if (typeof (window as any).__spawnChilis === 'function') {
-      (window as any).__spawnChilis(12);
+    if (typeof (window as any).__spawnTokens === 'function') {
+      (window as any).__spawnTokens(14);
+    } else if (typeof (window as any).__spawnChilis === 'function') {
+      (window as any).__spawnChilis(14);
     }
   });
 </script>

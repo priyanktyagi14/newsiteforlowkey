@@ -3,115 +3,102 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ButtonMask from '../components/ui/ButtonMask.astro';
+import MetricsTicker from '../components/agency/MetricsTicker.astro';
+import TestimonialDeck from '../components/agency/TestimonialDeck.astro';
+import { servicesData } from '../data/services';
 
-const services = [
+const masterFaqs = [
   {
-    id: 'web-development',
-    discipline: '01 // Software & Infrastructure',
-    title: 'Web Development & Platforms',
-    description: 'We build high-speed, edge-rendered web applications, business websites, and headless e-commerce architectures. We write zero-bloat, accessible code that converts visitors, scales reliably, and never buckles under peak loads.',
-    subServices: [
-      { name: 'Custom Web Applications', desc: 'Full-stack reactive web applications built on TypeScript, Astro, and Next.js.' },
-      { name: 'High-Converting Landing Pages', desc: 'Precision conversion funnels engineered with micro-interactions and sub-50ms TTFB.' },
-      { name: 'Headless E-Commerce', desc: 'Decoupled Shopify and Stripe architectures designed for frictionless multi-currency checkout.' },
-      { name: 'Workflow Automations & APIs', desc: 'Custom integrations connecting your CRM, payment gateways, and backend databases.' }
-    ]
+    q: 'Can Lowkeydevs support branding, web design, development, and creator distribution in one project?',
+    a: 'Yes. Our four core disciplines are tightly integrated. Rather than juggling disconnected contractors and agencies, you get one unified sprint team where system architecture, brand design, video content, and conversion engineering work in continuous harmony.'
   },
   {
-    id: 'social-creator',
-    discipline: '02 // Distribution & Talent',
-    title: 'Social Media & Creator Management',
-    description: 'Audience attention is fragmented across platforms. We bridge business objectives with genuine creator relationships, running talent discovery, partnership logistics, and end-to-end content distribution that earns real market share.',
-    subServices: [
-      { name: 'Social Media Management', desc: 'End-to-end brand channel stewardship, editorial calendars, and community engagement.' },
-      { name: 'Creator & Influencer Discovery', desc: 'Data-driven talent scouting to match high-affinity creators with your target audience.' },
-      { name: 'Contract & Campaign Logistics', desc: 'Brief formulation, deliverables tracking, legal terms, and payout administration.' },
-      { name: 'Trend Surfing & Strategy', desc: 'Rapid-response creative concepts that capitalize on emerging cultural momentum.' }
-    ]
+    q: 'How fast can we launch a sprint engagement?',
+    a: 'Our standard sprint cycles run 2 to 4 weeks depending on the discipline and deliverables. We formulate clear milestones upfront, lock scope, and start shipping immediately—no bureaucratic delays.'
   },
   {
-    id: 'creative-production',
-    discipline: '03 // Brand & Visuals',
-    title: 'Creative Production & Branding',
-    description: 'We construct magnetic visual identities and high-retention video assets that stop the scroll. From comprehensive brand systems to daily short-form reels, we craft aesthetics that make lasting impressions.',
-    subServices: [
-      { name: 'Brand Identity & Guidelines', desc: 'Logo systems, typography rules, chromatic tokens, and comprehensive voice guidelines.' },
-      { name: 'Short-Form Video Production', desc: 'Algorithm-optimized vertical videos engineered for TikTok, Instagram Reels, and YouTube Shorts.' },
-      { name: 'Commercial Post-Production', desc: 'High-fidelity video editing, cinema color grading, kinetic typography, and sound design.' },
-      { name: 'Graphic Design & Creative Direction', desc: 'Multi-platform advertising assets, pitch decks, packaging, and digital collateral.' }
-    ]
+    q: 'Do you work on fixed-price sprints or monthly retainers?',
+    a: 'We offer both. Brand identity sprints, platform builds, and web applications are typically structured as fixed-price sprints. Ongoing creator distribution, social stewardship, and growth engineering operate on flexible monthly retainers.'
   },
   {
-    id: 'digital-growth',
-    discipline: '04 // Scale & Authority',
-    title: 'Digital Growth & Inbound Demand',
-    description: 'Engineering without audience is invisible. We install sustainable customer acquisition pipelines through technical SEO, performance marketing, and digital transformation initiatives that compound over time.',
-    subServices: [
-      { name: 'Technical & Programmatic SEO', desc: 'Schema markup, core web vitals optimization, indexation architecture, and topical authority.' },
-      { name: 'Conversion Lead Generation', desc: 'Targeted inbound funnels, landing page A/B testing, and automated lead capture pipelines.' },
-      { name: 'Digital Presence Management', desc: 'Reputation management, search knowledge graphs, and brand authority positioning.' },
-      { name: 'Business Digitization', desc: 'Transitioning manual operational workflows into automated digital systems.' }
-    ]
-  }
-];
-
-const faqs = [
-  {
-    q: 'How fast can we launch a project with Lowkeydevs?',
-    a: 'Our standard sprint turnarounds range from 2 to 4 weeks depending on the discipline and scope. We define clear milestones upfront and begin execution immediately.'
+    q: 'Who owns the intellectual property and code repositories?',
+    a: 'You do. 100% of the code repositories, Figma design tokens, raw 4K video footage, and digital deliverables belong to your business outright upon milestone settlement.'
   },
   {
-    q: 'Do you work on fixed-scope projects or monthly retainers?',
-    a: 'We offer both. Brand launches and platform builds are typically structured as fixed-price sprints. Ongoing creator management, social distribution, and growth engineering operate on flexible monthly retainers.'
-  },
-  {
-    q: 'Who owns the intellectual property and code?',
-    a: 'You do. Upon completion and milestone settlement, 100% of the code repositories, brand assets, and creative deliverables are owned outright by your business.'
-  },
-  {
-    q: 'How do you communicate during an active engagement?',
-    a: 'We communicate directly via a dedicated Slack/Discord channel and async loom updates. You have direct access to the builders executing your project—no intermediary account managers.'
+    q: 'How do you communicate during an active sprint?',
+    a: 'We set up a private Slack or Discord channel with your core stakeholders and deliver async Loom video walk-throughs twice a week. You speak directly with the builders executing the work.'
   }
 ];
 ---
 
 <Layout
-  title="Services & Capabilities — Lowkeydevs"
-  description="Explore Lowkeydevs' core disciplines: Web Development, Social Media & Creator Management, Creative Production, and Digital Growth."
+  title="Capabilities & Services — Lowkeydevs"
+  description="Explore Lowkeydevs' core disciplines: Web Development & Platforms, Social Media & Creator Management, Creative Production, and Digital Growth."
 >
   <Header />
 
-  <main id="main-content" class="site-max pt-36 pb-24">
+  <main id="main-content">
     <!-- Services Page Hero -->
-    <div class="mb-24 text-center max-w-4xl mx-auto">
-      <span class="text-12 text-[#ff3831] font-bold block mb-4 tracking-widest uppercase">Our Capabilities</span>
-      <h1 class="h1 font-tan mb-8">We know what we're good at.</h1>
-      <p class="text-18 text-white/70 max-w-2xl mx-auto">
+    <section class="services-hero site-max">
+      <span class="services-hero__kicker">Our Capabilities</span>
+      <h1 class="services-hero__title">We know what we're good at!</h1>
+      <p class="services-hero__lead">
         Four focused disciplines engineered to deliver unfair advantages for ambitious brands, founders, and modern creators.
       </p>
-    </div>
+
+      <!-- Quick Jump Discipline Navigation -->
+      <nav class="services-nav" aria-label="Discipline Quick Links">
+        {servicesData.map(s => (
+          <a href={`#${s.id}`} class="services-nav__pill">
+            <span class="services-nav__num">{s.number}</span>
+            <span>{s.shortTitle}</span>
+          </a>
+        ))}
+      </nav>
+    </section>
+
+    <!-- Metrics Ticker Bar -->
+    <MetricsTicker />
 
     <!-- 4 Disciplines Deep Dive -->
-    <div class="flex flex-col gap-32">
-      {services.map(s => (
-        <section id={s.id} class="border-t border-white/10 pt-16">
-          <div class="grid grid-cols-1 s:grid-cols-12 gap-8">
-            <div class="s:col-span-5">
-              <span class="text-12 text-[#ff3831] font-bold block mb-3 uppercase tracking-wider">{s.discipline}</span>
-              <h2 class="h3 font-tan text-[#fffddb] mb-6">{s.title}</h2>
-              <p class="text-15 text-white/70 leading-relaxed mb-8">{s.description}</p>
-              <ButtonMask href="/contact" variant="outline">
-                <span>Inquire About This Service</span>
-                <span class="btn-mask__icon">→</span>
-              </ButtonMask>
+    <div class="site-max">
+      {servicesData.map(s => (
+        <section id={s.id} class="service-discipline" aria-labelledby={`heading-${s.id}`}>
+          <div class="service-discipline__grid">
+            <!-- Left Sticky Sidebar -->
+            <div class="service-discipline__sidebar">
+              <span class="service-discipline__kicker">{s.discipline}</span>
+              <h2 id={`heading-${s.id}`} class="service-discipline__title">{s.title}</h2>
+              <p class="service-discipline__desc">{s.lead}</p>
+              
+              <div class="service-discipline__actions">
+                <ButtonMask href={`/services/${s.slug}`} variant="cream">
+                  <span>Explore Discipline</span>
+                  <span class="btn-mask__icon">→</span>
+                </ButtonMask>
+                <ButtonMask href={`/contact?service=${s.slug}`} variant="outline">
+                  <span>Inquire Now</span>
+                  <span class="btn-mask__icon">→</span>
+                </ButtonMask>
+              </div>
             </div>
 
-            <div class="s:col-span-7 grid grid-cols-1 s:grid-cols-2 gap-6">
-              {s.subServices.map(sub => (
-                <div class="p-6 bg-white/[0.02] border border-white/10 rounded-global">
-                  <h3 class="text-18 font-bold text-[#fffddb] mb-2">{sub.name}</h3>
-                  <p class="text-15 text-white/60 leading-normal">{sub.desc}</p>
-                </div>
+            <!-- Right Capabilities Grid -->
+            <div class="capability-grid">
+              {s.capabilities.map(cap => (
+                <article class="capability-card">
+                  <div>
+                    <h3 class="capability-card__title">{cap.name}</h3>
+                    <p class="capability-card__desc">{cap.desc}</p>
+                  </div>
+                  {cap.deliverables && cap.deliverables.length > 0 && (
+                    <div class="capability-card__tags">
+                      {cap.deliverables.map(tag => (
+                        <span class="capability-card__tag">{tag}</span>
+                      ))}
+                    </div>
+                  )}
+                </article>
               ))}
             </div>
           </div>
@@ -119,27 +106,54 @@ const faqs = [
       ))}
     </div>
 
-    <!-- FAQ Accordion -->
-    <section class="mt-40 border-t border-white/10 pt-20 max-w-4xl mx-auto">
-      <span class="text-12 text-[#ff3831] font-bold block mb-4 tracking-widest uppercase text-center">Frequently Asked Questions</span>
-      <h2 class="h2 font-tan text-center mb-16">Clear answers upfront.</h2>
+    <!-- Client Testimonials ("Client Confessions") -->
+    <TestimonialDeck />
 
-      <div class="flex flex-col divide-y divide-white/10">
-        {faqs.map(faq => (
-          <details class="py-6 group cursor-pointer">
-            <summary class="text-20 font-bold text-[#fffddb] flex justify-between items-center list-none select-none">
-              <span>{faq.q}</span>
-              <span class="text-red transition-transform duration-300 group-open:rotate-45 text-2xl font-normal">+</span>
-            </summary>
-            <p class="text-15 text-white/70 mt-4 leading-relaxed pl-2">
-              {faq.a}
-            </p>
-          </details>
-        ))}
+    <!-- FAQ Accordion -->
+    <section class="site-max">
+      <div class="faq-wrap">
+        <div class="faq-header">
+          <span class="services-hero__kicker">Frequently Asked Questions</span>
+          <h2 class="h2 font-tan text-center">Clear answers upfront.</h2>
+        </div>
+
+        <div class="faq-list">
+          {masterFaqs.map(faq => (
+            <details class="faq-item">
+              <summary class="faq-summary">
+                <span class="faq-question">{faq.q}</span>
+                <span class="faq-icon" aria-hidden="true">+</span>
+              </summary>
+              <p class="faq-content">
+                {faq.a}
+              </p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Bottom CTA Banner -->
+    <section class="site-max">
+      <div class="services-cta-banner">
+        <span class="services-hero__kicker">Ready To Ship</span>
+        <h2 class="services-cta-banner__title">Let's build your advantage.</h2>
+        <p class="services-cta-banner__lead">
+          Tell us about your brand, your timeline, and the disciplines you need. We review every project brief and respond within 24 business hours.
+        </p>
+        <div class="services-cta-banner__actions">
+          <ButtonMask href="/contact" variant="red">
+            <span>Start a Project</span>
+            <span class="btn-mask__icon">→</span>
+          </ButtonMask>
+          <ButtonMask href="/agency" variant="outline">
+            <span>About The Studio</span>
+            <span class="btn-mask__icon">→</span>
+          </ButtonMask>
+        </div>
       </div>
     </section>
   </main>
 
   <Footer />
 </Layout>
-

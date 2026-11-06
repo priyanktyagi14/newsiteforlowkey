@@ -5,8 +5,11 @@ import ButtonMask from './ui/ButtonMask.astro';
 <header class="sh" id="site-header">
   <!-- Pinned Top-Left Brand Mark Box -->
   <a href="/" class="sh__box" aria-label="Lowkeydevs Home">
-    <svg class="w-24 h-24" width="28" height="28" viewBox="0 0 41 54" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M28.8696 28.0488C30.5395 26.3207 32.2966 24.5889 34.6832 23.8524C37.4845 22.9866 40.806 23.68 40.4895 27.1865C40.2785 29.529 37.1425 31.1421 35.6873 32.8487C33.6682 35.2199 32.846 38.6115 30.6923 41.1228C30.3176 41.5576 28.8078 42.8042 28.6659 43.124C28.2912 43.9899 29.4481 47.3958 29.3717 48.6245C29.3026 49.7491 27.7673 51.0353 26.8796 51.6353C22.7541 54.4197 13.5972 54.6065 9.69728 51.3155C7.60179 49.5443 8.33303 48.5311 8.20206 46.1204C8.16932 45.5168 7.98378 44.906 8.03471 44.2845C4.72048 41.6869 2.21024 38.4067 1.10792 34.3181C0.329389 31.4296 -0.107174 26.2093 2.52311 24.1111C2.75595 23.9243 3.50902 23.565 3.54176 23.5183C3.6036 23.4285 3.77459 22.0884 3.94558 21.6465C4.3494 20.6046 5.50265 19.0561 6.71411 18.977L5.03698 16.5663C2.77414 13.0598 1.47536 9.75801 3.13794 5.64071C5.64817 -0.57118 13.4845 -1.7532 17.9228 3.17607C18.152 3.43116 19.0106 4.7533 19.2071 4.70659C19.3089 4.68144 19.68 4.01319 19.8182 3.84073C22.3539 0.761735 25.348 -0.592737 29.4044 0.506649C35.5017 2.15573 37.0625 9.15084 34.6541 14.3603C33.8101 16.1819 32.4385 17.6441 31.4563 19.3399C29.9792 21.8872 29.0224 25.1279 28.866 28.0524L28.8696 28.0488Z" fill="#FFFEDB" />
+    <svg class="w-24 h-24" width="26" height="26" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        fill="#FFFFFF"
+        d="M0 0 L80 0 L100 75 L120 150 L200 150 L180 75 L100 75 L20 75 Z"
+      />
     </svg>
   </a>
 
@@ -22,10 +25,11 @@ import ButtonMask from './ui/ButtonMask.astro';
         </svg>
       </button>
       <div class="sh__subnav" id="services-subnav">
-        <a href="/services#web-development" class="sh__sublink">Web Development</a>
-        <a href="/services#social-creator" class="sh__sublink">Social & Creators</a>
-        <a href="/services#creative-production" class="sh__sublink">Creative & Brand</a>
-        <a href="/services#digital-growth" class="sh__sublink">Digital Growth</a>
+        <a href="/services" class="sh__sublink" style="color: var(--color-accent-red); font-weight: 700;">Overview →</a>
+        <a href="/services/web-development" class="sh__sublink">Web Development</a>
+        <a href="/services/social-creator" class="sh__sublink">Social & Creators</a>
+        <a href="/services/creative-production" class="sh__sublink">Creative & Brand</a>
+        <a href="/services/digital-growth" class="sh__sublink">Digital Growth</a>
       </div>
     </div>
 
@@ -54,8 +58,8 @@ import ButtonMask from './ui/ButtonMask.astro';
   <!-- Fullscreen Mobile Navigation Drawer -->
   <div class="mm" id="mobile-menu" aria-hidden="true">
     <div class="flex justify-between items-center">
-      <a href="/" class="font-tan text-3xl text-[#fffddb]">Lowkeydevs</a>
-      <button class="text-2xl text-[#ff3831] p-2" id="mobile-close" aria-label="Close menu">✕</button>
+      <a href="/" class="font-display text-3xl text-white font-bold tracking-tight">Lowkey<span class="text-[#8C52FF]">devs</span></a>
+      <button class="text-2xl text-[#8C52FF] p-2" id="mobile-close" aria-label="Close menu">✕</button>
     </div>
 
     <nav class="mm__links">
@@ -63,12 +67,12 @@ import ButtonMask from './ui/ButtonMask.astro';
       <a href="/services" class="mm__link">Services</a>
       <a href="/agency" class="mm__link">Agency</a>
       <a href="/agency#process" class="mm__link">Process</a>
-      <a href="/contact" class="mm__link text-[#ff3831]">Start a Project →</a>
+      <a href="/contact" class="mm__link text-[#8C52FF]">Start a Project →</a>
     </nav>
 
     <div class="flex flex-col gap-2 pt-6 border-t border-white/10">
       <span class="text-sm text-white/50 uppercase tracking-widest">Inquiries</span>
-      <a href="mailto:hello@lowkeydevs.com" class="text-lg text-[#fffddb]">hello@lowkeydevs.com</a>
+      <a href="mailto:hello@lowkeydevs.com" class="text-lg text-white">hello@lowkeydevs.com</a>
     </div>
   </div>
 </header>

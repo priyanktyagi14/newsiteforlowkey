@@ -1,0 +1,202 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ButtonMask from '../../components/ui/ButtonMask.astro';
+import TestimonialDeck from '../../components/agency/TestimonialDeck.astro';
+import { servicesData, type ServiceItem } from '../../data/services';
+
+export async function getStaticPaths() {
+  return servicesData.map(s => ({
+    params: { slug: s.slug },
+    props: { service: s }
+  }));
+}
+
+const { slug } = Astro.params;
+const { service: propsService } = Astro.props as { service?: ServiceItem };
+const service = propsService || servicesData.find(s => s.slug === slug);
+
+if (!service) {
+  return Astro.redirect('/services');
+}
+
+// Find previous and next service
+const currentIndex = servicesData.findIndex(s => s.slug === service.slug);
+const prevService = servicesData[(currentIndex - 1 + servicesData.length) % servicesData.length];
+const nextService = servicesData[(currentIndex + 1) % servicesData.length];
+---
+
+<Layout
+  title={`${service.title} — Lowkeydevs`}
+  description={service.tagline}
+>
+  <Header />
+
+  <main id="main-content">
+    <!-- Service Detail Hero -->
+    <section class="services-hero site-max">
+      <span class="services-hero__kicker">{service.discipline}</span>
+      <h1 class="services-hero__title">{service.title}</h1>
+      <p class="services-hero__lead">
+        {service.tagline}
+      </p>
+
+      <div class="services-nav">
+        <ButtonMask href={`/contact?service=${service.slug}`} variant="red">
+          <span>Start a Sprint</span>
+          <span class="btn-mask__icon">→</span>
+        </ButtonMask>
+        <ButtonMask href="#capabilities" variant="outline">
+          <span>Explore Capabilities</span>
+          <span class="btn-mask__icon">↓</span>
+        </ButtonMask>
+      </div>
+
+      <!-- Highlight Metric Counters -->
+      <div class="service-metrics">
+        {service.metrics.map(m => (
+          <div class="service-metric-item">
+            <div class="service-metric-item__value">{m.value}</div>
+            <div class="service-metric-item__label">{m.label}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Editorial Narrative Statement -->
+    <section class="editorial-section site-max">
+      <div class="editorial-section__grid">
+        <h2 class="editorial-section__title">{service.narrativeHeading}</h2>
+        <div class="editorial-section__body">
+          {service.narrative.map(p => (
+            <p>{p}</p>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- What We Build / Capabilities Grid -->
+    <section id="capabilities" class="site-max pt-16 pb-24">
+      <div class="mb-16 text-center" style="margin-bottom: 6rem; text-align: center;">
+        <span class="services-hero__kicker">Discipline Catalog</span>
+        <h2 class="h2 font-tan text-center">What We Build</h2>
+        <p class="services-hero__lead" style="margin-top: 1.5rem;">
+          Specialized capabilities engineered to give your brand an unfair market advantage.
+        </p>
+      </div>
+
+      <div class="capability-grid">
+        {service.capabilities.map(cap => (
+          <article class="capability-card">
+            <div>
+              <h3 class="capability-card__title">{cap.name}</h3>
+              <p class="capability-card__desc">{cap.desc}</p>
+            </div>
+            {cap.deliverables && cap.deliverables.length > 0 && (
+              <div class="capability-card__tags">
+                {cap.deliverables.map(tag => (
+                  <span class="capability-card__tag">{tag}</span>
+                ))}
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+
+      <!-- Tangible Deliverables Checklist Box -->
+      <div class="deliverables-box">
+        <h3 class="deliverables-box__title">What You Walk Away With</h3>
+        <ul class="deliverables-list">
+          {service.deliverables.map(deliv => (
+            <li>{deliv}</li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- Process / Methodology Roadmap -->
+    <section class="process-section site-max">
+      <div class="process-section__header">
+        <span class="services-hero__kicker">The Execution Model</span>
+        <h2 class="h2 font-tan text-center">How We Execute</h2>
+      </div>
+
+      <div class="process-grid">
+        {service.process.map(phase => (
+          <div class="process-card">
+            <span class="process-card__tag">{phase.step}</span>
+            <h3 class="process-card__title">{phase.title}</h3>
+            <p class="process-card__desc">{phase.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Client Confessions / Testimonial Deck -->
+    <TestimonialDeck />
+
+    <!-- Discipline-Specific FAQ Accordion -->
+    <section class="site-max">
+      <div class="faq-wrap">
+        <div class="faq-header">
+          <span class="services-hero__kicker">Questions & Answers</span>
+          <h2 class="h2 font-tan text-center">Clear answers for this discipline.</h2>
+        </div>
+
+        <div class="faq-list">
+          {service.faqs.map(faq => (
+            <details class="faq-item">
+              <summary class="faq-summary">
+                <span class="faq-question">{faq.q}</span>
+                <span class="faq-icon" aria-hidden="true">+</span>
+              </summary>
+              <p class="faq-content">
+                {faq.a}
+              </p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Sticky Bottom Navigation Dock (Griflan Model) -->
+    <nav class="service-dock" aria-label="Discipline Navigation">
+      <ButtonMask href={`/services/${prevService.slug}`} variant="outline">
+        <span class="btn-mask__icon">←</span>
+        <span>{prevService.shortTitle}</span>
+      </ButtonMask>
+      <ButtonMask href="/services" variant="cream">
+        <span>All Capabilities</span>
+      </ButtonMask>
+      <ButtonMask href={`/services/${nextService.slug}`} variant="outline">
+        <span>{nextService.shortTitle}</span>
+        <span class="btn-mask__icon">→</span>
+      </ButtonMask>
+    </nav>
+
+    <!-- Bottom Conversion Banner -->
+    <section class="site-max">
+      <div class="services-cta-banner">
+        <span class="services-hero__kicker">Partner With Lowkeydevs</span>
+        <h2 class="services-cta-banner__title">Let's build {service.shortTitle}.</h2>
+        <p class="services-cta-banner__lead">
+          Lock in your dedicated sprint window. We review all technical requirements and respond within 24 business hours.
+        </p>
+        <div class="services-cta-banner__actions">
+          <ButtonMask href={`/contact?service=${service.slug}`} variant="red">
+            <span>Inquire About {service.shortTitle}</span>
+            <span class="btn-mask__icon">→</span>
+          </ButtonMask>
+          <ButtonMask href="/services" variant="outline">
+            <span>View All Services</span>
+            <span class="btn-mask__icon">→</span>
+          </ButtonMask>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+

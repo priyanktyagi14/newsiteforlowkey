@@ -19,7 +19,7 @@ import Footer from '../components/Footer.astro';
   <Header />
 
   <main id="main-content">
-    <!-- Section 01: Hero & Tagline -->
+    <!-- Section 01: Hero & Tagline (Atmospheric & Kinetic) -->
     <HeroSection />
 
     <!-- Section 02: Execution Standards & Capability Ticker -->
@@ -44,3 +44,34 @@ import Footer from '../components/Footer.astro';
   <!-- Section 07: Studio Manifesto & Interactive Physics Footer -->
   <Footer />
 </Layout>
+
+<script>
+  // Page-Wide Scroll Reveal Observer
+  const initScrollReveals = () => {
+    const revealTargets = document.querySelectorAll(
+      '.work__header, .case-item, .wins__header, .win-card, .clients, .client-cell, .confessions__header, .confession-card'
+    );
+
+    revealTargets.forEach(el => el.classList.add('reveal-on-scroll'));
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealTargets.forEach(el => observer.observe(el));
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initScrollReveals);
+  } else {
+    initScrollReveals();
+  }
+</script>

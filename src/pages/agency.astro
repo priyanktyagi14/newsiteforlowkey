@@ -3,6 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ButtonMask from '../components/ui/ButtonMask.astro';
+import MetricsTicker from '../components/agency/MetricsTicker.astro';
+import TestimonialDeck from '../components/agency/TestimonialDeck.astro';
 
 const principles = [
   {
@@ -52,28 +54,43 @@ const processSteps = [
 >
   <Header />
 
-  <main id="main-content" class="site-max pt-36 pb-24">
+  <main id="main-content">
     <!-- Agency Hero -->
-    <div class="mb-32 text-center max-w-4xl mx-auto">
-      <span class="text-12 text-[#ff3831] font-bold block mb-4 tracking-widest uppercase">The Studio</span>
-      <h1 class="h1 font-tan mb-8">Lowkey presence.<br/>High-impact output.</h1>
-      <p class="text-18 text-white/70 max-w-2xl mx-auto leading-relaxed">
+    <section class="services-hero site-max">
+      <span class="services-hero__kicker">The Studio</span>
+      <h1 class="services-hero__title">Lowkey presence.<br/>High-impact output.</h1>
+      <p class="services-hero__lead">
         Most digital agencies are loud on self-promotion and fragile on execution. We operate with deliberate understatement—letting the performance of our software, brand craft, and client growth speak for itself.
       </p>
-    </div>
+      <div class="services-nav">
+        <ButtonMask href="/contact" variant="red">
+          <span>Start a Project</span>
+          <span class="btn-mask__icon">→</span>
+        </ButtonMask>
+        <ButtonMask href="#principles" variant="outline">
+          <span>Our Principles</span>
+          <span class="btn-mask__icon">↓</span>
+        </ButtonMask>
+      </div>
+    </section>
+
+    <!-- Metrics Ticker -->
+    <MetricsTicker />
 
     <!-- Principles Matrix -->
-    <section class="border-t border-white/10 pt-20 mb-36">
-      <span class="text-12 text-[#ff3831] font-bold block mb-4 tracking-widest uppercase">Core Values</span>
-      <h2 class="h2 font-tan mb-16">The Lowkey Standard</h2>
+    <section id="principles" class="site-max editorial-section">
+      <div class="faq-header">
+        <span class="services-hero__kicker">Core Values</span>
+        <h2 class="h2 font-tan text-center">The Lowkey Standard</h2>
+      </div>
 
-      <div class="grid grid-cols-1 s:grid-cols-2 gap-12">
+      <div class="capability-grid" style="margin-top: 6rem;">
         {principles.map(p => (
-          <div class="p-10 bg-white/[0.02] border border-white/10 rounded-global flex flex-col justify-between">
+          <div class="capability-card">
             <div>
-              <span class="font-tan text-4xl text-[#ff3831] block mb-6">{p.num}</span>
-              <h3 class="text-24 font-bold text-[#fffddb] mb-4">{p.title}</h3>
-              <p class="text-15 text-white/70 leading-relaxed">{p.body}</p>
+              <span class="font-tan text-4xl" style="font-size: 3.5rem; color: var(--color-accent-red); display: block; margin-bottom: 1.5rem;">{p.num}</span>
+              <h3 class="capability-card__title" style="font-size: 2.2rem; margin-bottom: 1.5rem;">{p.title}</h3>
+              <p class="capability-card__desc" style="font-size: 1.6rem; line-height: 1.6;">{p.body}</p>
             </div>
           </div>
         ))}
@@ -81,32 +98,33 @@ const processSteps = [
     </section>
 
     <!-- The 3-Step Process -->
-    <section id="process" class="border-t border-white/10 pt-20 max-w-5xl mx-auto">
-      <span class="text-12 text-[#ff3831] font-bold block mb-4 tracking-widest uppercase text-center">Our Methodology</span>
-      <h2 class="h2 font-tan text-center mb-16">How we execute.</h2>
+    <section id="process" class="process-section site-max">
+      <div class="process-section__header">
+        <span class="services-hero__kicker">Our Methodology</span>
+        <h2 class="h2 font-tan text-center">How We Execute</h2>
+      </div>
 
-      <div class="flex flex-col gap-12">
-        {processSteps.map((step, idx) => (
-          <div class="flex flex-col s:flex-row gap-8 p-8 bg-white/[0.015] border border-white/10 rounded-global items-start">
-            <span class="px-4 py-2 bg-[#ff3831] text-[#fffddb] text-xs font-bold uppercase rounded-md tracking-wider">
-              {step.step}
-            </span>
-            <div class="flex-1">
-              <h3 class="text-24 font-bold text-[#fffddb] mb-3">{step.title}</h3>
-              <p class="text-15 text-white/70 leading-relaxed">{step.description}</p>
-            </div>
+      <div class="process-grid">
+        {processSteps.map((step) => (
+          <div class="process-card">
+            <span class="process-card__tag">{step.step}</span>
+            <h3 class="process-card__title">{step.title}</h3>
+            <p class="process-card__desc">{step.description}</p>
           </div>
         ))}
       </div>
 
-      <div class="text-center mt-20">
+      <div style="text-align: center; margin-top: 6rem;">
         <ButtonMask href="/contact" variant="red">
-          <span>Start a Sprint With Us →</span>
+          <span>Start a Sprint With Us</span>
+          <span class="btn-mask__icon">→</span>
         </ButtonMask>
       </div>
     </section>
+
+    <!-- Testimonial Deck -->
+    <TestimonialDeck />
   </main>
 
   <Footer />
 </Layout>
-
