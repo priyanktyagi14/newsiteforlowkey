@@ -3,11 +3,11 @@
   "type": "module",
   "version": "0.0.1",
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=20.0.0"
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "node -e \"const fs = require('fs'), path = require('path'), os = require('os'); [path.join(process.cwd(), '.wrangler'), path.join(os.homedir(), '.wrangler'), path.join(os.homedir(), '.config', '.wrangler')].forEach(d => { try { fs.rmSync(d, { recursive: true, force: true }) } catch(e){} })\" && astro build",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
     "test": "vitest run",
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.13",
+    "@astrojs/vercel": "^9.0.5",
     "@pdfsmaller/pdf-encrypt-lite": "^1.0.2",
     "@supabase/supabase-js": "^2.110.0",
     "astro": "^5.18.2",

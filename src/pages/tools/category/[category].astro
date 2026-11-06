@@ -7,6 +7,8 @@ import AdPlaceholder from '../../../components/AdPlaceholder.astro';
 import Icon from '../../../components/base/Icon.astro';
 import { categories, getToolsByCategory } from '../../../tools/registry';
 
+export const prerender = true;
+
 export async function getStaticPaths() {
   return categories.map(cat => ({
     params: { category: cat.slug },

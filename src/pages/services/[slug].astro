@@ -6,6 +6,8 @@ import ButtonMask from '../../components/ui/ButtonMask.astro';
 import TestimonialDeck from '../../components/agency/TestimonialDeck.astro';
 import { servicesData, type ServiceItem } from '../../data/services';
 
+export const prerender = true;
+
 export async function getStaticPaths() {
   return servicesData.map(s => ({
     params: { slug: s.slug },

@@ -251,6 +251,8 @@ const uiComponents: Record<string, any> = {
   'instagram-sans-text-generator': InstagramSansTextGeneratorUI
 };
 
+export const prerender = true;
+
 export async function getStaticPaths() {
   return registry.map(tool => ({
     params: { slug: tool.slug },
